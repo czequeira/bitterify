@@ -2,7 +2,9 @@
   "name": "bitterify",
   "version": "0.0.1",
   "description": "A frontend framework without tags",
+  "repository": "czequeira/bitterify",
   "main": "lib/index.js",
+  "keywords": ["framework", "frontend"],
   "types": "lib",
   "scripts": {
     "build": "tsc -p ."
