@@ -1,1 +1,1 @@
-export const name = 'browserify'
+export const name = 'browserify';
