@@ -1,3 +1,4 @@
+import { getString } from '../../utils';
 import { Component } from '../classes';
 import { Content, HtmlElement } from '../types';
 
@@ -6,11 +7,8 @@ export function createHtmlElement(
   content: Content,
   childs: Component[],
 ): HtmlElement {
-  let textContent = '';
   let htmlElement: HtmlElement;
-
-  if (typeof content === 'string') textContent = content;
-  else textContent = content();
+  const textContent = getString(content);
 
   if (htmlType !== 'text') {
     htmlElement = document.createElement(htmlType);
@@ -19,6 +17,15 @@ export function createHtmlElement(
   } else htmlElement = document.createTextNode(textContent);
 
   return htmlElement;
+}
+
+export function refreshContent(
+  htmlElement: HtmlElement,
+  content: Content,
+): void {
+  if (htmlElement instanceof HTMLElement)
+    htmlElement.innerText = getString(content);
+  else htmlElement.textContent = getString(content);
 }
 
 export function appendChilds(

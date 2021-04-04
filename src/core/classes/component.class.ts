@@ -1,5 +1,6 @@
-import { createHtmlElement } from '../actions';
+import { createHtmlElement, refreshContent } from '../actions';
 import { Content, HtmlElement } from '../types';
+import { Bind } from './bind.class';
 
 export class Component {
   private htmlElement: HtmlElement;
@@ -14,5 +15,13 @@ export class Component {
 
   getHtmlElement(): HtmlElement {
     return this.htmlElement;
+  }
+
+  subscribe(bind: Bind): void {
+    bind.subscribe(this);
+  }
+
+  refreshContent(): void {
+    refreshContent(this.htmlElement, this.content);
   }
 }
