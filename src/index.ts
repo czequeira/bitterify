@@ -1,1 +1,1 @@
-export const name = 'browserify';
+export * as core from './core';

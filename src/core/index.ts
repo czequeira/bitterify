@@ -1,5 +1,5 @@
-import { App, Component } from '../classes';
-import { Content } from '../types';
+import { App, Component } from './classes';
+import { Content } from './types';
 
 export function createApp(...components: Component[]): App {
   return new App(components);
