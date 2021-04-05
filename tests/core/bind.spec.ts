@@ -1,4 +1,4 @@
-import { mount } from '../../utils';
+import { mount } from '../utils';
 
 describe('binds', () => {
   test('it should change innerText', async () => {

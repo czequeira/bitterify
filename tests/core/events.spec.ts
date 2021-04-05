@@ -1,4 +1,4 @@
-import { mount } from '../../utils';
+import { mount } from '../utils';
 
 describe('events', () => {
   test('it should change the button text when click', async () => {

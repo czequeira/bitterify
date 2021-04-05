@@ -1,4 +1,4 @@
-import { mount } from '../../utils';
+import { mount } from '../utils';
 
 describe('mount', () => {
   test('it should mount a p with hello world', async () => {
