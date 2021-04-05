@@ -1,8 +1,13 @@
 import { App, Component } from './classes';
 import { Child, Content } from './types';
 
-export function createApp(...components: Component[]): App {
-  return new App(components);
+function childToComponent(child: Child): Component {
+  if (child instanceof Component) return child;
+  return new Component(undefined, child);
+}
+
+export function createApp(...childs: Child[]): App {
+  return new App(childs.map(childToComponent));
 }
 
 export function createComponent(
@@ -10,12 +15,5 @@ export function createComponent(
   content?: Content,
   childs: Child[] = [],
 ): Component {
-  return new Component(
-    htmlType,
-    content,
-    childs.map((c) => {
-      if (c instanceof Component) return c;
-      return new Component(undefined, c);
-    }),
-  );
+  return new Component(htmlType, content, childs.map(childToComponent));
 }
