@@ -25,7 +25,7 @@ the development server is optional, if you want you may create your own using we
 Create a file `src/index.ts` and copy the next code
 
 ``` ts
-import { app } from "bitterify/lib/components";
+import { app } from "bitterify";
 
 app('Hello world');
 ```
@@ -49,7 +49,7 @@ $ node_modules/.bin/bitter serve --help
 now lets create a h1 and a paragraph. to do this just import the components and use it
 
 ``` ts
-import { app, h1, p } from "bitterify/lib/components";
+import { app, h1, p } from "bitterify";
 
 const title = h1('title');
 const paragraph = p('this is a paragraph');
@@ -60,7 +60,7 @@ app(title, paragraph);
 
 Lets create a button and use the click method:
 ``` ts
-import { app, button } from "bitterify/lib/components";
+import { app, button } from "bitterify";
 
 const btn = button(() => {
   alert('button clicked');
@@ -72,7 +72,7 @@ app(btn);
 ### Binds
 A bind is a object to add reactive binds to the app, by example if we want change a text when we click a button:
 ``` ts
-import { app, button, p } from "bitterify/lib/components";
+import { app, button, p } from "bitterify";
 
 const application = app();
 const count = application.createBind('count', 0);
@@ -89,6 +89,24 @@ application.setChilds(paragraph, btn);
 
 the binds belongs to a app and we need to subscribe the component to the bind.
 
-### How to use it
+## How to use it
 
-the idea of **bitterify** is that the code stay clean, and to archive that we propouse the next rules:
+To use the framework is necesary import the app function fom `'bitterify'`, app take components as parameters, the components may be created using one of the functions like `p` or `button`.
+
+The components can be added to the app when we created or with the app method `setChilds`. Once the component is in the app they will be rendered by the browser.
+
+The components may be subscribed to changes in binds, to do that first create a bind with the app method `createBind`.
+
+To add a event call the component method `addEvent`.
+
+## TODO:
+- Add css class to components
+- Add ssr deploiment
+- Add dinamic responsive breackpoints
+- Add more components:
+  - navbar
+  - a
+  - form
+  - input
+  - modal
+- Add a router
