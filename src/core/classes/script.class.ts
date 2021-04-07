@@ -1,14 +1,8 @@
-export interface IScript {
-  readonly src: string;
-  readonly integrity: string;
-  readonly crossorigin: string;
-}
-
-export class Script implements IScript {
+export class Script {
   constructor(
-    readonly src: string,
-    readonly integrity = '',
-    readonly crossorigin = '',
+    private src: string,
+    private integrity = '',
+    private crossorigin = '',
   ) {}
 
   getTag(): string {

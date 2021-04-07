@@ -1,10 +1,9 @@
 import { appendChilds } from '../actions';
 import { MountError } from '../errors/mount.error';
-import { Links, Scripts } from '../types';
+import { Links } from '../types';
 import { Bind } from './bind.class';
 import { Component } from './component.class';
 import { Link } from './link.class';
-import { Script } from './script.class';
 
 export class App {
   private htmlElement: HTMLElement;
@@ -25,17 +24,6 @@ export class App {
       const style = document.createElement('link');
       style.innerHTML = link.getTag();
       document.head.appendChild(style);
-    });
-  }
-
-  addScripts(...scripts: Scripts): void {
-    scripts.forEach((s) => {
-      let script: Script;
-      if (typeof s === 'string') script = new Script(s);
-      else script = new Script(s.src, s.integrity, s.crossorigin);
-      const scriptElement = document.createElement('script');
-      scriptElement.innerHTML = script.getTag();
-      document.body.appendChild(scriptElement);
     });
   }
 
