@@ -10,13 +10,13 @@ typescript but if you want you can use javascrpit.
 First install the bitterify package
 
 ``` sh
-$npm i -s bitterify
+npm i -s bitterify
 ```
 
 if you want to use the develpment server then
 
 ``` sh
-$npm i -s browserify tsify watchify
+npm i -s browserify tsify watchify
 ```
 
 the development server is optional,
@@ -44,14 +44,14 @@ and add the next script:
 or just run
 
 ``` sh
-$node_modules/.bin/bitter serve
+node_modules/.bin/bitter serve
 ```
 
 your app will be serve at the url: `http://localhost:8080`, for mor options
 with the cli you can use:
 
 ``` sh
-$node_modules/.bin/bitter serve --help
+node_modules/.bin/bitter serve --help
 ```
 
 ### Add more components
@@ -105,10 +105,17 @@ application.setChilds(paragraph, btn);
 
 the binds belongs to a app and we need to subscribe the component to the bind.
 
+## Deployment
+
+To deploy the app just need to create a `html` whith a `id = "app"`
+tag and import a bundle of the app.
+The development server included create the html and bundle the app usin browserify.
+
 ## TODO
 
 - Add css class to components
 - Add ssr deployment
+- Add cdn deployment
 - Add dinamic responsive breackpoints
 - Add more components:
   - navbar
