@@ -105,6 +105,26 @@ application.setChilds(paragraph, btn);
 
 the binds belongs to a app and we need to subscribe the component to the bind.
 
+### Styles
+
+The css files can be imported with the `addLinks` method of the app and then
+use any class with the component methods `addClasses`, `setClasses` and `removeClasses`.
+
+The next example show how to use the [Bulma][https://bulma.io/] framework.
+
+``` ts
+import { app, button } from "bitterify";
+
+const App = app();
+App.addLinks('https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css');
+
+const btn = button(() => {
+  alert('button clicked');
+}).setClasses('button');
+
+App.setChilds(btn);
+```
+
 ## Deployment
 
 To deploy the app just need to create a `html` whith a `id = "app"`
