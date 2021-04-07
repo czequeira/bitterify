@@ -4,7 +4,7 @@ import { Links, Scripts } from '../types';
 import { Bind } from './bind.class';
 import { Component } from './component.class';
 import { Link } from './link.class';
-import {Script} from './script.class';
+import { Script } from './script.class';
 
 export class App {
   private htmlElement: HTMLElement;
@@ -35,7 +35,7 @@ export class App {
       else script = new Script(s.src, s.integrity, s.crossorigin);
       const scriptElement = document.createElement('script');
       scriptElement.innerHTML = script.getTag();
-      document.head.appendChild(scriptElement);
+      document.body.appendChild(scriptElement);
     });
   }
 
