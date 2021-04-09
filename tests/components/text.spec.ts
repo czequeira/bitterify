@@ -12,5 +12,11 @@ describe('component-text', () => {
     expect(mounted.querySelector('h3')?.innerText).toBe('h3');
     expect(mounted.querySelector('h4')?.innerText).toBe('h4');
     expect(mounted.querySelector('h5')?.innerText).toBe('h5');
+    expect(mounted.querySelector('h6')?.innerText).toBe('h6');
+    expect(mounted.querySelector('em')?.innerText).toBe('em');
+    expect(mounted.querySelector('code')?.innerText).toBe('code');
+    expect(mounted.querySelector('pre')?.innerText).toBe('pre');
+    expect(mounted.querySelector('strong')?.innerText).toBe('strong');
+    expect(mounted.querySelector('u')?.innerText).toBe('u');
   });
 });
