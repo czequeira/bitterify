@@ -5,6 +5,7 @@ import { Event } from './event.class';
 
 export class Component {
   private htmlElement: HtmlElement;
+  style: CSSStyleDeclaration;
   // private events: { [name: string]: Event } = {};
 
   constructor(
@@ -13,6 +14,9 @@ export class Component {
     private childs: Component[] = [],
   ) {
     this.htmlElement = createHtmlElement(htmlType, content, childs);
+    if (this.htmlElement instanceof HTMLElement)
+      this.style = this.htmlElement.style;
+    else this.style = new CSSStyleDeclaration();
   }
 
   getHtmlElement(): HtmlElement {
