@@ -23,6 +23,18 @@ export class Component {
     return this.htmlElement;
   }
 
+  setAttribute(key: string, value: string): Component {
+    if (this.htmlElement instanceof HTMLElement)
+      this.htmlElement.setAttribute(key, value);
+
+    return this;
+  }
+
+  getAttribute(key: string): string | null | undefined {
+    if (this.htmlElement instanceof HTMLElement)
+      return this.htmlElement.getAttribute(key);
+  }
+
   setClasses(...classes: string[]): Component {
     if (this.htmlElement instanceof HTMLElement)
       this.htmlElement.className = classes.join(' ');
