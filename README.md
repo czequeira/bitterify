@@ -108,7 +108,8 @@ the binds belongs to a app and we need to subscribe the component to the bind.
 ### Styles
 
 The css files can be imported with the `addLinks` method of the app and then
-use any class with the component methods `addClasses`, `setClasses` and `removeClasses`.
+use any class with the component methods `addClasses`, `setClasses` and `removeClasses`
+or use the style property of the components.
 
 The next example show how to use the [Bulma][https://bulma.io/] framework.
 
@@ -125,6 +126,45 @@ const btn = button(() => {
 App.setChilds(btn);
 ```
 
+``` ts
+import { app, p } from "bitterify";
+
+const P = p('red background');
+P.style.background = 'red';
+
+app(P);
+```
+
+### Inputs
+
+``` ts
+import { app, input, p } from 'bitterify';
+
+const App = app();
+
+const text = App.createBind('text', 'not changed');
+
+const Input = input(text, 'placeholder');
+
+const P = p(() => text.value);
+
+P.subscribe(text);
+
+App.setChilds(Input, P);
+```
+
+## Components
+
+|component|param|type|default|description|
+|-|-|-|-|-|
+|button|fn|Fn|`() => null`|event onclick callback|
+||content|Content|click me|content of the button|
+|a|content|Content|-|the text to show|
+||href|Content|#|the href of the link|
+|div|`...childs`|Child[]||the components childs|
+|input|bind|Bind||the value of the input|
+||placeholder|string|''|the placeholder of the input|
+
 ## Deployment
 
 To deploy the app just need to create a `html` whith a `id = "app"`
@@ -133,14 +173,13 @@ The development server included create the html and bundle the app usin browseri
 
 ## TODO
 
-- Add css class to components
 - Add ssr deployment
 - Add cdn deployment
 - Add dinamic responsive breackpoints
 - Add more components:
-  - navbar
-  - a
   - form
-  - input
   - modal
+  - col
+  - table
 - Add a router
+- Add life cicle hooks
