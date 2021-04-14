@@ -1,5 +1,6 @@
 export { button } from './button.component';
 export * from './div.component';
+export * from './table.component';
 export * from './text.component';
 export * from './layout.component';
 export * from './input.component';

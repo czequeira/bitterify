@@ -23,6 +23,10 @@ export class Component {
     return this.htmlElement;
   }
 
+  getHtmlType(): string {
+    return this.htmlType;
+  }
+
   setAttribute(key: string, value: string): Component {
     if (this.htmlElement instanceof HTMLElement)
       this.htmlElement.setAttribute(key, value);
