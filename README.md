@@ -184,6 +184,11 @@ App.setChilds(Input, P);
 |pre|content|Content||the text to show|
 |strong|content|Content||the text to show|
 |u|content|Content||the text to show|
+|trh|`...childs`|Child[]||the components childs|
+|tr|`...childs`|Child[]||the components childs|
+|table|head|trh Component||the row of the head|
+|table|footer|tr Component||the row of the body|
+|table|body|tr Component[]||the rows of the body|
 
 ## Deployment
 
@@ -200,7 +205,6 @@ The development server included create the html and bundle the app usin browseri
   - form
   - modal
   - col
-  - table
   - menu
 - Add a router
 - Add life cicle hooks
