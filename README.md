@@ -248,7 +248,6 @@ The development server included create the html and bundle the app usin browseri
 - Add cdn deployment
 - Add dinamic responsive breackpoints
 - Add more components:
-  - form
   - modal
   - col
   - menu
