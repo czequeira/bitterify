@@ -1,7 +1,6 @@
 import {
   b,
   code,
-  div,
   em,
   h1,
   h2,
@@ -18,7 +17,7 @@ import {
 import { createApp } from '../../../src/core';
 
 createApp(
-  div(
+  p(
     p('p'),
     b('b'),
     i('i'),

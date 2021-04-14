@@ -18,4 +18,9 @@ describe('component-div', () => {
     expect(divs[3].textContent).toBe('div 3');
     expect(divs[1].textContent).toBe('div 1div 3');
   });
+
+  test('it should mount the section and article', () => {
+    expect(mounted.querySelector('section')).toBeTruthy();
+    expect(mounted.querySelector('article')).toBeTruthy();
+  });
 });

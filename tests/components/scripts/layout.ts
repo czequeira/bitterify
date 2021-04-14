@@ -1,3 +1,3 @@
-import { app, aside, footer, nav } from '../../../src';
+import { app, aside, footer, main, nav } from '../../../src';
 
-app(nav(), aside(), footer());
+app(nav(), aside(), main(), footer());

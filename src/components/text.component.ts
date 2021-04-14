@@ -1,6 +1,10 @@
+import { createComponent } from '../core';
+import { Child } from '../core/types';
 import { createComponentFunction } from './utils';
 
-export const p = createComponentFunction('p');
+export function p(...childs: Child[]) {
+  return createComponent('p', undefined, childs);
+}
 export const b = createComponentFunction('b');
 export const i = createComponentFunction('i');
 export const h1 = createComponentFunction('h1');

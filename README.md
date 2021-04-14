@@ -181,5 +181,6 @@ The development server included create the html and bundle the app usin browseri
   - modal
   - col
   - table
+  - menu
 - Add a router
 - Add life cicle hooks

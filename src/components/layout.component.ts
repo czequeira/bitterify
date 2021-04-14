@@ -12,3 +12,7 @@ export function nav(...childs: Child[]) {
 export function footer(...childs: Child[]) {
   return createComponent('footer', undefined, childs);
 }
+
+export function main(...childs: Child[]) {
+  return createComponent('main', undefined, childs);
+}

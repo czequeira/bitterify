@@ -7,5 +7,6 @@ describe('component-layout', () => {
     expect(mounted.querySelector('aside')).toBeTruthy();
     expect(mounted.querySelector('nav')).toBeTruthy();
     expect(mounted.querySelector('footer')).toBeTruthy();
+    expect(mounted.querySelector('main')).toBeTruthy();
   });
 });
