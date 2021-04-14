@@ -187,8 +187,8 @@ App.setChilds(Input, P);
 |trh|`...childs`|Child[]||the components childs|
 |tr|`...childs`|Child[]||the components childs|
 |table|head|trh Component||the row of the head|
-|table|footer|tr Component||the row of the body|
-|table|body|tr Component[]||the rows of the body|
+||body|tr Component[]||the rows of the body|
+||footer|tr Component||the row of the body|
 
 ## Deployment
 
