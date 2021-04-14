@@ -158,12 +158,32 @@ App.setChilds(Input, P);
 |component|param|type|default|description|
 |-|-|-|-|-|
 |button|fn|Fn|`() => null`|event onclick callback|
-||content|Content|click me|content of the button|
-|a|content|Content|-|the text to show|
-||href|Content|#|the href of the link|
-|div|`...childs`|Child[]||the components childs|
+||content|Content|`'click me'`|content of the button|
+|a|content|Content||the text to show|
+||href|Content|`'#'`|the href of the link|
 |input|bind|Bind||the value of the input|
-||placeholder|string|''|the placeholder of the input|
+||placeholder|string|`''`|the placeholder of the input|
+|div|`...childs`|Child[]||the components childs|
+|section|`...childs`|Child[]||the components childs|
+|article|`...childs`|Child[]||the components childs|
+|aside|`...childs`|Child[]||the components childs|
+|nav|`...childs`|Child[]||the components childs|
+|footer|`...childs`|Child[]||the components childs|
+|main|`...childs`|Child[]||the components childs|
+|p|`...childs`|Child[]||the components childs|
+|b|content|Content||the text to show|
+|i|content|Content||the text to show|
+|h1|content|Content||the text to show|
+|h2|content|Content||the text to show|
+|h3|content|Content||the text to show|
+|h4|content|Content||the text to show|
+|h5|content|Content||the text to show|
+|h6|content|Content||the text to show|
+|em|content|Content||the text to show|
+|code|content|Content||the text to show|
+|pre|content|Content||the text to show|
+|strong|content|Content||the text to show|
+|u|content|Content||the text to show|
 
 ## Deployment
 
