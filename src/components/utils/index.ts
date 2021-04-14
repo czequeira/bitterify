@@ -9,3 +9,13 @@ export function createComponentFunction(
     return createComponent(htmlType, content);
   };
 }
+
+export interface IValidator {
+  required?: boolean;
+  minlength?: number;
+  maxlength?: number;
+  min?: number;
+  max?: number;
+  type?: string;
+  pattern?: string;
+}
