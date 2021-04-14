@@ -6,7 +6,8 @@
   "main": "lib/index.js",
   "keywords": [
     "framework",
-    "frontend"
+    "frontend",
+    "typescript"
   ],
   "types": "lib",
   "scripts": {
