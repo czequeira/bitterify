@@ -153,6 +153,48 @@ P.subscribe(text);
 App.setChilds(Input, P);
 ```
 
+### Table
+
+``` ts
+import { app, table, tr, trh } from 'bitterify';
+
+const body = [
+  ['Bartolo', '100'],
+  ['Maritza', '20'],
+  ['Rozendo', '29'],
+];
+
+app(
+  table(
+    trh('name', 'age'),
+    body.map((i) => tr(...i)),
+  ),
+);
+```
+
+### Form
+
+``` ts
+import { app, button, form, formItem, input } from 'bitterify';
+
+const App = app();
+const Bind = App.createBind('input');
+const Input = input(Bind);
+const FormItem = formItem(Input, {
+  pattern: '\\d+',
+});
+const Button = button();
+const Form = form(
+  (e) => {
+    e.preventDefault();
+  },
+  FormItem,
+  Button,
+);
+
+App.setChilds(Form);
+```
+
 ## Components
 
 |component|param|type|default|description|
@@ -189,6 +231,10 @@ App.setChilds(Input, P);
 |table|head|trh Component||the row of the head|
 ||body|tr Component[]||the rows of the body|
 ||footer|tr Component||the row of the body|
+|formItem|input|Component||the component of the form|
+||validator|IValidator||the rules to validate|
+|form|submit|`(event: Event) => void`||the callback function when submit the form|
+||`...formItems`|Child[]||the components childs|
 
 ## Deployment
 
