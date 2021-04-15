@@ -66,7 +66,7 @@ export class Component {
   }
 
   subscribe(bind: Bind): Component {
-    bind.subscribe(this);
+    bind.subscribeComponents(this);
     return this;
   }
 
