@@ -1,4 +1,4 @@
-import { Content } from '../core/types';
+import { Child, Content } from '../core/types';
 
 export function getString(content: Content): string {
   let textContent = '';
@@ -7,4 +7,9 @@ export function getString(content: Content): string {
   else textContent = content();
 
   return textContent;
+}
+
+export function getChilds(childs: Child[] | (() => Child[])): Child[] {
+  if (typeof childs === 'function') return childs();
+  return childs;
 }

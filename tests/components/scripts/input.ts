@@ -1,4 +1,4 @@
-import { app, input, b } from '../../../src';
+import { app, input, p } from '../../../src';
 
 const App = app();
 
@@ -6,8 +6,6 @@ const text = App.createBind('text', 'not changed');
 
 const Input = input(text, 'placeholder');
 
-const B = b(() => text.value);
+const P = p(() => [text.value], text);
 
-B.subscribe(text);
-
-App.setChilds([Input, B]);
+App.setChilds([Input, P]);

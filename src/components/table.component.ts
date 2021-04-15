@@ -3,7 +3,7 @@ import { Component } from '../core/classes';
 import { BitterifyError } from '../core/errors';
 import { Content } from '../core/types';
 
-function row(isHeader: boolean, ...contents: Content[]): Component {
+function row(isHeader: boolean, contents: Content[]): Component {
   return createComponent(
     'tr',
     undefined,
@@ -11,8 +11,8 @@ function row(isHeader: boolean, ...contents: Content[]): Component {
   );
 }
 
-export const tr = (contents: Content[]) => row(false, ...contents);
-export const trh = (contents: Content[]) => row(true, ...contents);
+export const tr = (contents: Content[]) => row(false, contents);
+export const trh = (contents: Content[]) => row(true, contents);
 
 export function table(
   head: Component,

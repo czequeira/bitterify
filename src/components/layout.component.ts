@@ -1,18 +1,6 @@
-import { createComponent } from '../core';
-import { Child } from '../core/types';
+import { createDinamicChilds } from './utils';
 
-export function aside(childs: Child[] = []) {
-  return createComponent('aside', undefined, childs);
-}
-
-export function nav(childs: Child[] = []) {
-  return createComponent('nav', undefined, childs);
-}
-
-export function footer(childs: Child[] = []) {
-  return createComponent('footer', undefined, childs);
-}
-
-export function main(childs: Child[] = []) {
-  return createComponent('main', undefined, childs);
-}
+export const aside = createDinamicChilds('aside');
+export const nav = createDinamicChilds('nav');
+export const footer = createDinamicChilds('footer');
+export const main = createDinamicChilds('main');

@@ -6,7 +6,7 @@ const Input = input(Bind);
 const FormItem = formItem(Input, {
   pattern: '\\d+',
 });
-const Button = button();
+const Button = button(() => {}, 'submit');
 const Form = form(
   (e) => {
     e.preventDefault();

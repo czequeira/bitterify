@@ -20,6 +20,6 @@ describe('component-input', () => {
       input.dispatchEvent(new Event('input'));
     }
 
-    expect(mounted.querySelector('p')?.innerText).toBe('changed');
+    expect(mounted.querySelector('p')?.innerHTML).toBe('changed');
   });
 });

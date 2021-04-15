@@ -1,5 +1,5 @@
-import { createHtmlElement, refreshContent } from '../actions';
-import { Content, Fn, HtmlElement } from '../types';
+import { createHtmlElement, refreshContent, setChilds } from '../actions';
+import { Child, Content, Fn, HtmlElement } from '../types';
 import { Bind } from './bind.class';
 import { Event } from './event.class';
 
@@ -11,7 +11,7 @@ export class Component {
   constructor(
     private htmlType = 'text',
     private content: Content = '',
-    private childs: Component[] = [],
+    childs: Component[] = [],
   ) {
     this.htmlElement = createHtmlElement(htmlType, content, childs);
     if (this.htmlElement instanceof HTMLElement)
@@ -24,6 +24,11 @@ export class Component {
 
   getHtmlType(): string {
     return this.htmlType;
+  }
+
+  setChilds(childs: Child[]): Component {
+    setChilds(this.htmlElement, childs);
+    return this;
   }
 
   setStyle(property: string, value: string): Component {

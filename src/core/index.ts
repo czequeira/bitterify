@@ -1,10 +1,6 @@
+import { childToComponent } from './actions';
 import { App, Component } from './classes';
 import { Child, Content } from './types';
-
-function childToComponent(child: Child): Component {
-  if (child instanceof Component) return child;
-  return new Component(undefined, child);
-}
 
 export function createApp(childs: Child[]): App {
   return new App(childs.map(childToComponent));

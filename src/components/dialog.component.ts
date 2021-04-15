@@ -2,9 +2,16 @@ import { createComponent } from '../core';
 import { Component } from '../core/classes';
 import { Bind } from '../core/classes/bind.class';
 import { Child } from '../core/types';
+import { getChilds } from '../utils';
 
-export function dialog(visible: Bind, childs: Child[]): Component {
-  const modal = createComponent('dialog', undefined, childs);
+export function dialog(visible: Bind, childs: Child[]): Component;
+export function dialog(
+  visible: Bind,
+  childs: () => Child[],
+  bind: Bind,
+): Component;
+export function dialog(visible: Bind, childs: any, bind?: Bind): Component {
+  const modal = createComponent('dialog', undefined, getChilds(childs));
 
   visible.subscribeCallback('modal-visible', () => {
     const htmlDialogElement = modal.getHtmlElement();
@@ -17,6 +24,11 @@ export function dialog(visible: Bind, childs: Child[]): Component {
       }
     }
   });
+
+  if (bind)
+    bind.subscribeCallback('id', () => {
+      modal.setChilds(childs);
+    });
 
   return modal;
 }
