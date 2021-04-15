@@ -6,9 +6,9 @@ const body = [
   ['Rozendo', '29'],
 ];
 
-app(
+app([
   table(
-    trh('name', 'age'),
-    body.map((i) => tr(...i)),
+    trh(['name', 'age']),
+    body.map((i) => tr(i)),
   ),
-);
+]);

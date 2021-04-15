@@ -2,7 +2,7 @@ import { createComponent } from '../core';
 import { Child } from '../core/types';
 import { createComponentFunction } from './utils';
 
-export function p(...childs: Child[]) {
+export function p(childs: Child[]) {
   return createComponent('p', undefined, childs);
 }
 export const b = createComponentFunction('b');

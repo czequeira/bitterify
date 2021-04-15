@@ -6,7 +6,7 @@ function childToComponent(child: Child): Component {
   return new Component(undefined, child);
 }
 
-export function createApp(...childs: Child[]): App {
+export function createApp(childs: Child[]): App {
   return new App(childs.map(childToComponent));
 }
 

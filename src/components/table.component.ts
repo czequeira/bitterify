@@ -11,8 +11,8 @@ function row(isHeader: boolean, ...contents: Content[]): Component {
   );
 }
 
-export const tr = (...contents: Content[]) => row(false, ...contents);
-export const trh = (...contents: Content[]) => row(true, ...contents);
+export const tr = (contents: Content[]) => row(false, ...contents);
+export const trh = (contents: Content[]) => row(true, ...contents);
 
 export function table(
   head: Component,

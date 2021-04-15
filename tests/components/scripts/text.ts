@@ -16,9 +16,9 @@ import {
 } from '../../../src/components';
 import { createApp } from '../../../src/core';
 
-createApp(
-  p(
-    p('p'),
+createApp([
+  p([
+    p(['p']),
     b('b'),
     i('i'),
     h1('h1'),
@@ -32,5 +32,5 @@ createApp(
     pre('pre'),
     strong('strong'),
     u('u'),
-  ),
-);
+  ]),
+]);

@@ -1,7 +1,7 @@
 import { button } from '../../../src/components';
 import { createApp } from '../../../src/core';
 
-const app = createApp();
+const app = createApp([]);
 const buttonBind = app.createBind('buttonBind', 'before click');
 
 const btn = button(
@@ -10,4 +10,4 @@ const btn = button(
 );
 btn.subscribe(buttonBind);
 
-app.setChilds(btn);
+app.setChilds([btn]);

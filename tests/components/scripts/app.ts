@@ -1,3 +1,3 @@
 import { app } from '../../../src/components';
 
-app('app');
+app(['app']);

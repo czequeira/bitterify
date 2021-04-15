@@ -11,8 +11,7 @@ const Form = form(
   (e) => {
     e.preventDefault();
   },
-  FormItem,
-  Button,
+  [FormItem, Button],
 );
 
-App.setChilds(Form);
+App.setChilds([Form]);

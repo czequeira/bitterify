@@ -70,7 +70,7 @@ export class Component {
   }
 
   subscribe(bind: Bind): Component {
-    bind.subscribeComponents(this);
+    bind.subscribeComponent(this);
     return this;
   }
 

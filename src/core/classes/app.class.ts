@@ -16,7 +16,7 @@ export class App {
     appendChilds(htmlElement, childs);
   }
 
-  addLinks(...links: Links): void {
+  addLinks(links: Links): void {
     links.forEach((l) => {
       let link: Link;
       if (typeof l === 'string') link = new Link(l);
@@ -27,7 +27,7 @@ export class App {
     });
   }
 
-  setChilds(...childs: Component[]): void {
+  setChilds(childs: Component[]): void {
     this.childs = childs;
     appendChilds(this.htmlElement, childs);
   }

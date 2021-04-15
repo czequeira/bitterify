@@ -18,7 +18,7 @@ export function formItem(input: Component, validator?: IValidator): Component {
 
 export function form(
   submit: (event: Event) => void,
-  ...formItems: Child[]
+  formItems: Child[]
 ): Component {
   const form = createComponent('form', undefined, formItems);
   form.addEvent('submit', submit);

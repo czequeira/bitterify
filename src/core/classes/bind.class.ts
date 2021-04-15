@@ -9,8 +9,8 @@ export class Bind {
     this._value = value;
   }
 
-  subscribeComponents(...components: Component[]): void {
-    this.subscribers = [...this.subscribers, ...components];
+  subscribeComponent(component: Component): void {
+    this.subscribers.push(component);
   }
 
   subscribeCallback(id: string, callback: () => void): void {
