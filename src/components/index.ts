@@ -7,3 +7,4 @@ export * from './layout.component';
 export * from './input.component';
 export { app } from './app.component';
 export { a } from './a.component';
+export { dialog } from './dialog.component';

@@ -235,6 +235,8 @@ App.setChilds(Form);
 ||validator|IValidator||the rules to validate|
 |form|submit|`(event: Event) => void`||the callback function when submit the form|
 ||`...formItems`|Child[]||the components childs|
+|dialog|visible|Bind|the bind to open the dialog|
+||childs|Child[]||the components childs|
 
 ## Deployment
 
@@ -248,7 +250,6 @@ The development server included create the html and bundle the app usin browseri
 - Add cdn deployment
 - Add dinamic responsive breackpoints
 - Add more components:
-  - modal
   - col
   - menu
 - Add a router
