@@ -5,7 +5,7 @@ import { Event } from './event.class';
 
 export class Component {
   private htmlElement: HtmlElement;
-  style: CSSStyleDeclaration;
+  private style: CSSStyleDeclaration | undefined;
   // private events: { [name: string]: Event } = {};
 
   constructor(
@@ -16,7 +16,6 @@ export class Component {
     this.htmlElement = createHtmlElement(htmlType, content, childs);
     if (this.htmlElement instanceof HTMLElement)
       this.style = this.htmlElement.style;
-    else this.style = new CSSStyleDeclaration();
   }
 
   getHtmlElement(): HtmlElement {
@@ -25,6 +24,11 @@ export class Component {
 
   getHtmlType(): string {
     return this.htmlType;
+  }
+
+  setStyle(property: string, value: string): Component {
+    this.style?.setProperty(property, value);
+    return this;
   }
 
   setAttribute(key: string, value: string): Component {

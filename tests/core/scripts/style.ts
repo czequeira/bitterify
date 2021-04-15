@@ -4,4 +4,4 @@ const p = createComponent('p', 'Hello world');
 
 createApp(p);
 
-p.style.background = 'red';
+p.setStyle('background', 'red');
