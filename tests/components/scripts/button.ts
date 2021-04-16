@@ -6,7 +6,7 @@ const buttonBind = app.createBind('buttonBind', 'before click');
 
 const btn = button(
   () => (buttonBind.value = 'after click'),
-  () => buttonBind.value,
+  (bind) => bind.value,
   buttonBind,
 );
 

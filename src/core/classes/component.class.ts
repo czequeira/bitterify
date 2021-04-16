@@ -12,8 +12,9 @@ export class Component {
     private htmlType = 'text',
     private content: Content = '',
     childs: Component[] = [],
+    bind?: Bind,
   ) {
-    this.htmlElement = createHtmlElement(htmlType, content, childs);
+    this.htmlElement = createHtmlElement(htmlType, content, childs, bind);
     if (this.htmlElement instanceof HTMLElement)
       this.style = this.htmlElement.style;
   }
@@ -79,7 +80,7 @@ export class Component {
     return this;
   }
 
-  refreshContent(): void {
-    refreshContent(this.htmlElement, this.content);
+  refreshContent(bind: Bind): void {
+    refreshContent(this.htmlElement, this.content, bind);
   }
 }

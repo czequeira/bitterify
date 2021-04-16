@@ -1,14 +1,16 @@
 import { getString } from '../../utils';
 import { Component } from '../classes';
+import { Bind } from '../classes/bind.class';
 import { Child, Content, HtmlElement } from '../types';
 
 export function createHtmlElement(
   htmlType: string,
   content: Content,
   childs: Component[],
+  bind?: Bind,
 ): HtmlElement {
   let htmlElement: HtmlElement;
-  const textContent = getString(content);
+  const textContent = getString(content, bind);
 
   if (htmlType !== 'text') {
     htmlElement = document.createElement(htmlType);
@@ -22,10 +24,11 @@ export function createHtmlElement(
 export function refreshContent(
   htmlElement: HtmlElement,
   content: Content,
+  bind: Bind,
 ): void {
   if (htmlElement instanceof HTMLElement)
-    htmlElement.innerText = getString(content);
-  else htmlElement.textContent = getString(content);
+    htmlElement.innerText = getString(content, bind);
+  else htmlElement.textContent = getString(content, bind);
 }
 
 export function childToComponent(child: Child): Component {

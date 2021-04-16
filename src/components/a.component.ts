@@ -12,13 +12,13 @@ export function a(
   bind: Bind,
 ): Component;
 export function a(content: any, href: any, bind?: Bind): Component {
-  const a = createComponent('a', content);
-  a.setAttribute('href', getString(href));
+  const a = createComponent('a', content, undefined, bind);
+  a.setAttribute('href', getString(href, bind));
   if (bind) {
     if (typeof content === 'function') a.subscribe(bind);
     if (typeof href === 'function')
-      bind.subscribeCallback('id', () => {
-        a.setAttribute('href', href());
+      bind.subscribeCallback('id', (b: Bind) => {
+        a.setAttribute('href', href(b));
       });
   }
   return a;

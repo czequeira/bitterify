@@ -7,11 +7,19 @@ import { getChilds } from '../../utils';
 
 export function createDinamicContent(htmlType: string) {
   function dinamicContent(content: string): Component;
-  function dinamicContent(content: () => string, bind: Bind): Component;
+  function dinamicContent(
+    content: (bind: Bind) => string,
+    bind: Bind,
+  ): Component;
   function dinamicContent(content: any, bind?: Bind): Component {
     if (typeof content === 'string') return createComponent(htmlType, content);
     if (bind) {
-      const dinamicContentComponent = createComponent(htmlType, content);
+      const dinamicContentComponent = createComponent(
+        htmlType,
+        content,
+        undefined,
+        bind,
+      );
       dinamicContentComponent.subscribe(bind);
       return dinamicContentComponent;
     }
@@ -22,19 +30,22 @@ export function createDinamicContent(htmlType: string) {
 }
 
 export function createDinamicChilds(htmlType: string) {
-  function dinamicChilds(): Component
+  function dinamicChilds(): Component;
   function dinamicChilds(childs: Child[]): Component;
-  function dinamicChilds(childs: () => Child[], bind: Bind): Component;
+  function dinamicChilds(
+    childs: (bind: Bind) => Child[],
+    bind: Bind,
+  ): Component;
   function dinamicChilds(childs: any = [], bind?: Bind): Component {
     const dinamicChildsComponent = createComponent(
       htmlType,
       undefined,
-      getChilds(childs),
+      getChilds(childs, bind),
     );
 
     if (bind)
-      bind.subscribeCallback('id', () => {
-        dinamicChildsComponent.setChilds(childs());
+      bind.subscribeCallback('id', (bind: Bind) => {
+        dinamicChildsComponent.setChilds(childs(bind));
       });
 
     return dinamicChildsComponent;

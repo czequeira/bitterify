@@ -6,10 +6,20 @@ const bind = app.createBind('bind', 'initial');
 const bind2 = app.createBind('bind2', 'initial');
 bind.subscribeCallback('bind2', () => (bind2.value = 'changed'));
 
-const p = createComponent('p', () => `Bind: ${bind.value}`);
+const p = createComponent(
+  'p',
+  (bind) => `Bind: ${bind.value}`,
+  undefined,
+  bind,
+);
 p.subscribe(bind);
 
-const b = createComponent('b', () => `Bind2: ${bind2.value}`);
+const b = createComponent(
+  'b',
+  (bind) => `Bind2: ${bind.value}`,
+  undefined,
+  bind2,
+);
 b.subscribe(bind2);
 
 app.setChilds([p, b]);

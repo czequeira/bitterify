@@ -7,11 +7,11 @@ import { getChilds } from '../utils';
 export function dialog(visible: Bind, childs: Child[]): Component;
 export function dialog(
   visible: Bind,
-  childs: () => Child[],
+  childs: (bind: Bind) => Child[],
   bind: Bind,
 ): Component;
 export function dialog(visible: Bind, childs: any, bind?: Bind): Component {
-  const modal = createComponent('dialog', undefined, getChilds(childs));
+  const modal = createComponent('dialog', undefined, getChilds(childs, bind));
 
   visible.subscribeCallback('modal-visible', () => {
     const htmlDialogElement = modal.getHtmlElement();
@@ -26,8 +26,8 @@ export function dialog(visible: Bind, childs: any, bind?: Bind): Component {
   });
 
   if (bind)
-    bind.subscribeCallback('id', () => {
-      modal.setChilds(childs);
+    bind.subscribeCallback('id', (bind: Bind) => {
+      modal.setChilds(getChilds(childs, bind));
     });
 
   return modal;

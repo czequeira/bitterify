@@ -1,8 +1,9 @@
 import { Component, ILink } from '../classes';
+import { Bind } from '../classes/bind.class';
 
 export type HtmlElement = HTMLElement | Text;
 
-export type Content = string | (() => string);
+export type Content = string | ((bind: Bind) => string);
 
 export type Fn = (...args: any[]) => any;
 
@@ -12,7 +13,7 @@ export type Links = Array<ILink | string>;
 
 interface ICallbackSubscribed {
   id: string;
-  callback: () => void;
+  callback: (bind: Bind) => void;
 }
 
 export type Subscriber = Component | ICallbackSubscribed;

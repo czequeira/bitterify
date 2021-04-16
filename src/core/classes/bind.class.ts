@@ -13,15 +13,15 @@ export class Bind {
     this.subscribers.push(component);
   }
 
-  subscribeCallback(id: string, callback: () => void): void {
+  subscribeCallback(id: string, callback: (bind: Bind) => void): void {
     this.subscribers.push({ id, callback });
   }
 
   set value(value: any) {
     this._value = value;
     this.subscribers.forEach((c) => {
-      if (c instanceof Component) c.refreshContent();
-      else c.callback();
+      if (c instanceof Component) c.refreshContent(this);
+      else c.callback(this);
     });
   }
 
