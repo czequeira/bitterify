@@ -1,5 +1,5 @@
-import { a, app } from '../../../src';
+import { app, bitterA } from '../../../src';
 
-const anchor = a('link', 'https://example.com');
+const anchor = bitterA('link', 'https://example.com');
 
 app([anchor]);

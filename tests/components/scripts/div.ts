@@ -1,4 +1,12 @@
-import { article, div, section } from '../../../src/components';
-import { createApp } from '../../../src/core';
+import {
+  app,
+  bitterArticle,
+  bitterDiv,
+  bitterSection,
+} from '../../../src/components';
 
-createApp([section([div(['div 1', div([div(['div 3', article()])])])])]);
+app([
+  bitterSection([
+    bitterDiv(['div 1', bitterDiv([bitterDiv(['div 3', bitterArticle()])])]),
+  ]),
+]);

@@ -1,9 +1,8 @@
-import { app, button, bind, dialog, p } from '../../../src';
+import { app, bind, bitterButton, bitterDialog, bitterP } from '../../../src';
 
-const App = app();
 const visible = bind(false);
 
-const Button = button(() => (visible.value = !visible.value), 'open');
-const Dialog = dialog(visible, [p(['funciona'])]);
+const Button = bitterButton(() => (visible.value = !visible.value), 'open');
+const Dialog = bitterDialog(visible, [bitterP(['funciona'])]);
 
-App.setChilds([Button, Dialog]);
+app([Button, Dialog]);

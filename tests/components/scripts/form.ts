@@ -1,17 +1,23 @@
-import { app, button, bind, form, formItem, input } from '../../../src';
+import {
+  app,
+  bind,
+  bitterButton,
+  bitterForm,
+  bitterFormItem,
+  bitterInput,
+} from '../../../src';
 
-const App = app();
 const Bind = bind(null, 'string');
-const Input = input(Bind);
-const FormItem = formItem(Input, {
+const input = bitterInput(Bind);
+const formItem = bitterFormItem(input, {
   pattern: '\\d+',
 });
-const Button = button(() => {}, 'submit');
-const Form = form(
+const button = bitterButton(() => console.log('submited'), 'submit');
+const form = bitterForm(
   (e) => {
     e.preventDefault();
   },
-  [FormItem, Button],
+  [formItem, button],
 );
 
-App.setChilds([Form]);
+app([form]);

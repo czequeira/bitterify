@@ -1,4 +1,4 @@
-import { app, bind, table, tableColumn } from '../../../src';
+import { app, bind, bitterTable, tableColumn } from '../../../src';
 
 const data = bind([
   ['Bartolo', '100'],
@@ -6,7 +6,7 @@ const data = bind([
   ['Rozendo', '29'],
 ]);
 
-const Table = table(data, [
+const Table = bitterTable(data, [
   tableColumn('name', (d) => d[0]),
   tableColumn('age', (d) => d[1]),
 ]);

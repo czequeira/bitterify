@@ -2,15 +2,23 @@ import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
 import { getString } from '../utils';
 
-export function a(content: string, href: string): Component;
-export function a(content: () => string, href: string, bind: Bind): Component;
-export function a(content: string, href: () => string, bind: Bind): Component;
-export function a(
+export function bitterA(content: string, href: string): Component;
+export function bitterA(
+  content: () => string,
+  href: string,
+  bind: Bind,
+): Component;
+export function bitterA(
+  content: string,
+  href: () => string,
+  bind: Bind,
+): Component;
+export function bitterA(
   content: () => string,
   href: () => string,
   bind: Bind,
 ): Component;
-export function a(content: any, href: any, bind?: Bind): Component {
+export function bitterA(content: any, href: any, bind?: Bind): Component {
   const a = createComponent('a', content, undefined, bind);
   a.setAttribute('href', getString(href, bind));
   if (bind) {

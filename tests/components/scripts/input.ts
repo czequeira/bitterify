@@ -1,11 +1,9 @@
-import { app, bind, input, p } from '../../../src';
-
-const App = app();
+import { app, bind, bitterInput, bitterP } from '../../../src';
 
 const text = bind('not changed');
 
-const Input = input(text, 'placeholder');
+const input = bitterInput(text, 'placeholder');
 
-const P = p((bind) => [bind.value], text);
+const p = bitterP((bind) => [bind.value], text);
 
-App.setChilds([Input, P]);
+app([input, p]);

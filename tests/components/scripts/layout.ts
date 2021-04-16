@@ -1,3 +1,9 @@
-import { app, aside, footer, main, nav } from '../../../src';
+import {
+  app,
+  bitterAside,
+  bitterFooter,
+  bitterMain,
+  bitterNav,
+} from '../../../src';
 
-app([nav(), aside(), main(), footer()]);
+app([bitterNav(), bitterAside(), bitterMain(), bitterFooter()]);

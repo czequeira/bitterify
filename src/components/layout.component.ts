@@ -1,6 +1,6 @@
 import { createDinamicChilds } from './utils';
 
-export const aside = createDinamicChilds('aside');
-export const nav = createDinamicChilds('nav');
-export const footer = createDinamicChilds('footer');
-export const main = createDinamicChilds('main');
+export const bitterAside = createDinamicChilds('aside');
+export const bitterNav = createDinamicChilds('nav');
+export const bitterFooter = createDinamicChilds('footer');
+export const bitterMain = createDinamicChilds('main');

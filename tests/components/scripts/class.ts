@@ -1,9 +1,9 @@
-import { app, div } from '../../../src/components';
+import { app, bitterDiv } from '../../../src/components';
 
-const div1 = div().setClasses('example', 'example2');
-const div2 = div().setClasses('example', 'example2');
-const div3 = div().addClasses('example3', 'example4');
-const div4 = div().addClasses('example3', 'example4');
+const div1 = bitterDiv().setClasses('example', 'example2');
+const div2 = bitterDiv().setClasses('example', 'example2');
+const div3 = bitterDiv().addClasses('example3', 'example4');
+const div4 = bitterDiv().addClasses('example3', 'example4');
 
 app([div1, div2, div3, div4]);
 

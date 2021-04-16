@@ -1,4 +1,4 @@
-export { button } from './button.component';
+export * from './button.component';
 export * from './div.component';
 export * from './form.component';
 export * from './table.component';
@@ -6,6 +6,6 @@ export * from './bind.component';
 export * from './text.component';
 export * from './layout.component';
 export * from './input.component';
-export { app } from './app.component';
-export { a } from './a.component';
-export { dialog } from './dialog.component';
+export * from './app.component';
+export * from './a.component';
+export * from './dialog.component';

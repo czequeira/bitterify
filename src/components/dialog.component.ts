@@ -3,13 +3,17 @@ import { Component, Bind } from '../core/classes';
 import { Child } from '../core/types';
 import { getChilds } from '../utils';
 
-export function dialog(visible: Bind, childs: Child[]): Component;
-export function dialog(
+export function bitterDialog(visible: Bind, childs: Child[]): Component;
+export function bitterDialog(
   visible: Bind,
   childs: (bind: Bind) => Child[],
   bind: Bind,
 ): Component;
-export function dialog(visible: Bind, childs: any, bind?: Bind): Component {
+export function bitterDialog(
+  visible: Bind,
+  childs: any,
+  bind?: Bind,
+): Component {
   const modal = createComponent('dialog', undefined, getChilds(childs, bind));
 
   visible.subscribeCallback('modal-visible', () => {

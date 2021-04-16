@@ -1,13 +1,11 @@
-import { button } from '../../../src/components';
-import { createApp, createBind } from '../../../src/core';
+import { app, bind, bitterButton } from '../../../src';
 
-const app = createApp([]);
-const buttonBind = createBind('before click');
+const buttonBind = bind('before click');
 
-const btn = button(
+const btn = bitterButton(
   () => (buttonBind.value = 'after click'),
   (bind) => bind.value,
   buttonBind,
 );
 
-app.setChilds([btn]);
+app([btn]);
