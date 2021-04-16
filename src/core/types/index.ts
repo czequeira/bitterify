@@ -1,5 +1,4 @@
-import { Component, ILink } from '../classes';
-import { Bind } from '../classes/bind.class';
+import { Component, ILink, Bind } from '../classes';
 
 export type HtmlElement = HTMLElement | Text;
 

@@ -1,6 +1,5 @@
 import { createComponent } from '../core';
-import { Component } from '../core/classes';
-import { Bind } from '../core/classes/bind.class';
+import { Component, Bind } from '../core/classes';
 
 export function input(bind: Bind, placeholder = ''): Component {
   const input = createComponent('input');

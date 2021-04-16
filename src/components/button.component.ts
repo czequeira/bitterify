@@ -1,6 +1,5 @@
 import { createComponent } from '../core';
-import { Component } from '../core/classes';
-import { Bind } from '../core/classes/bind.class';
+import { Component, Bind } from '../core/classes';
 
 export function button(fn: () => void, content: string): Component;
 export function button(

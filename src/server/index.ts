@@ -6,9 +6,12 @@ import watchify from 'watchify';
 export async function serve(port = 8080, file = 'src/index.ts') {
   let compiled = '';
   function bundle() {
+    console.log('compiling...');
+
     b.bundle(function (err, buf) {
       if (err) throw err;
       compiled = buf.toString();
+      console.log('compiled');
     });
   }
 
