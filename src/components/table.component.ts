@@ -1,39 +1,52 @@
 import { createComponent } from '../core';
-import { Component } from '../core/classes';
+import { Bind, Component } from '../core/classes';
 import { BitterifyError } from '../core/errors';
-import { Content } from '../core/types';
+import { Child } from '../core/types';
 
-// function row(isHeader: boolean, contents: Content[]): Component {
-//   return createComponent(
-//     'tr',
-//     undefined,
-//     contents.map((i) => createComponent(isHeader ? 'th' : 'td', i)),
-//   );
-// }
-//
-// export const tr = (contents: Content[]) => row(false, contents);
-// export const trh = (contents: Content[]) => row(true, contents);
+interface ITableColumn {
+  header: string;
+  body: (arg: any) => Child;
+}
 
-export function table(
-  head: Component,
-  body: Component[],
-  footer?: Component,
-): Component {
-  if (head.getHtmlType() !== 'tr')
-    throw new BitterifyError('the head must be a tr');
-  if (footer && footer.getHtmlType() !== 'tr')
-    throw new BitterifyError('the footer must be a tr');
-  body.forEach((i) => {
-    if (i.getHtmlType() !== 'tr')
-      throw new BitterifyError('all components body must be tr');
+export function tableColumn(
+  header: string,
+  body: (arg: any) => Child,
+): ITableColumn {
+  return { header, body };
+}
+
+function createBody(bind: Bind, tableColumns: ITableColumn[]): Component {
+  if (!Array.isArray(bind.value))
+    throw new BitterifyError('the bind must be an array');
+
+  return createComponent(
+    'tbody',
+    undefined,
+    bind.value.map((i) =>
+      createComponent(
+        'tr',
+        undefined,
+        tableColumns.map((k) => createComponent('td', undefined, [k.body(i)])),
+      ),
+    ),
+  );
+}
+
+export function table(bind: Bind, tableColumns: ITableColumn[]): Component {
+  const thead = createComponent('thead', undefined, [
+    createComponent(
+      'tr',
+      undefined,
+      tableColumns.map((i) => createComponent('th', i.header)),
+    ),
+  ]);
+  let tbody = createBody(bind, tableColumns);
+  const table = createComponent('table', undefined, [thead, tbody]);
+
+  bind.subscribeCallback('id', (data) => {
+    tbody = createBody(data, tableColumns);
+    table.setChilds([thead, tbody]);
   });
 
-  const tableComponents = [
-    createComponent('thead', undefined, [head]),
-    createComponent('tbody', undefined, body),
-  ];
-  if (footer)
-    tableComponents.push(createComponent('tfoot', undefined, [footer]));
-
-  return createComponent('table', undefined, tableComponents);
+  return table;
 }
