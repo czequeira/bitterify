@@ -1,8 +1,8 @@
 import { button } from '../../../src/components';
-import { createApp } from '../../../src/core';
+import { createApp, createBind } from '../../../src/core';
 
 const app = createApp([]);
-const buttonBind = app.createBind('buttonBind', 'before click');
+const buttonBind = createBind('before click');
 
 const btn = button(
   () => (buttonBind.value = 'after click'),

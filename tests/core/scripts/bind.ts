@@ -1,9 +1,9 @@
-import { createApp, createComponent } from '../../../src/core';
+import { createApp, createBind, createComponent } from '../../../src/core';
 
 const app = createApp([]);
-const bind = app.createBind('bind', 'initial');
+const bind = createBind('initial');
 
-const bind2 = app.createBind('bind2', 'initial');
+const bind2 = createBind('initial');
 bind.subscribeCallback('bind2', () => (bind2.value = 'changed'));
 
 const p = createComponent(

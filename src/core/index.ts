@@ -1,6 +1,5 @@
 import { childToComponent } from './actions';
-import { App, Component } from './classes';
-import { Bind } from './classes/bind.class';
+import { App, Bind, Component } from './classes';
 import { Child, Content } from './types';
 
 export function createApp(childs: Child[]): App {
@@ -14,4 +13,8 @@ export function createComponent(
   bind?: Bind,
 ): Component {
   return new Component(htmlType, content, childs.map(childToComponent), bind);
+}
+
+export function createBind(_value: any, _typeof?: string): Bind {
+  return new Bind(_value, _typeof);
 }

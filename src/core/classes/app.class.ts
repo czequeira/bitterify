@@ -7,7 +7,7 @@ import { Link } from './link.class';
 
 export class App {
   private htmlElement: HTMLElement;
-  private binds: { [name: string]: Bind } = {};
+  // private binds: { [name: string]: Bind } = {};
 
   constructor(private childs: Component[] = [], mountPoint = 'app') {
     const htmlElement = document.getElementById(mountPoint);
@@ -32,9 +32,9 @@ export class App {
     appendChilds(this.htmlElement, childs);
   }
 
-  createBind(name: string, value: any = null): Bind {
-    const bind = new Bind(value);
-    this.binds[name] = bind;
-    return bind;
-  }
+  // createBind(name: string, value: any = null): Bind {
+  //   const bind = new Bind(value);
+  //   this.binds[name] = bind;
+  //   return bind;
+  // }
 }

@@ -1,7 +1,7 @@
-import { app, button, dialog, p } from '../../../src';
+import { app, button, createBind, dialog, p } from '../../../src';
 
 const App = app();
-const visible = App.createBind('visible', false);
+const visible = createBind(false);
 
 const Button = button(() => (visible.value = !visible.value), 'open');
 const Dialog = dialog(visible, [p(['funciona'])]);
