@@ -1,8 +1,8 @@
-import { app, createBind, input, p } from '../../../src';
+import { app, bind, input, p } from '../../../src';
 
 const App = app();
 
-const text = createBind('not changed');
+const text = bind('not changed');
 
 const Input = input(text, 'placeholder');
 

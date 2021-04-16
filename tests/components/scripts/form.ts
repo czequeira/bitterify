@@ -1,7 +1,7 @@
-import { app, button, createBind, form, formItem, input } from '../../../src';
+import { app, button, bind, form, formItem, input } from '../../../src';
 
 const App = app();
-const Bind = createBind(null, 'string');
+const Bind = bind(null, 'string');
 const Input = input(Bind);
 const FormItem = formItem(Input, {
   pattern: '\\d+',
