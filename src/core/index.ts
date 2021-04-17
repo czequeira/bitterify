@@ -1,5 +1,5 @@
 import { childToComponent } from './actions';
-import { App, Bind, Component } from './classes';
+import { App, Bind, Component, Route, Router } from './classes';
 import { Child, Content } from './types';
 
 export function createApp(childs: Child[]): App {
@@ -17,4 +17,12 @@ export function createComponent(
 
 export function createBind(_value: any, _typeof?: string): Bind {
   return new Bind(_value, _typeof);
+}
+
+export function createRoute(path: string, view: Child): Route {
+  return new Route(path, view);
+}
+
+export function createRouter(routes: Route[]): Router {
+  return new Router(routes);
 }
