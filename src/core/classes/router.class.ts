@@ -1,18 +1,33 @@
+import { BitterifyError } from '../errors';
 import { Child } from '../types';
 import { Component } from './component.class';
 
-// TODO:
-// - patch correct /^\w+(\-\w+)*(\/(\w+(\-\w+)*|\$))*$/
+const REG_PATCH = /^\w+(\-\w+)*(\/(\w+(\-\w+)*|\$))*$/;
 
 export class Route {
-  constructor(private patch: string, private view: Child) {}
+  private path: string;
+  private regExp: RegExp;
 
-  getPatch(): string {
-    return this.patch;
+  constructor(path: string, private view: (args: string[]) => Child) {
+    if (!REG_PATCH.test(path)) throw new BitterifyError('invalid path');
+    this.path = path;
+
+    let regExp = path.replace(/\//g, '\\/');
+    regExp = regExp.replace(/\$/g, '(\\w+)');
+
+    this.regExp = new RegExp(`^\#${regExp}$`);
   }
 
-  getView(): Child {
-    return this.view;
+  getPath(): string {
+    return this.path;
+  }
+
+  getView(args: string[]): Child {
+    return this.view(args);
+  }
+
+  getRegExp(): RegExp {
+    return this.regExp;
   }
 }
 
@@ -29,10 +44,14 @@ export class Router {
   }
 
   private renderView(): void {
-    const current = this.routes.find(
-      (i) => i.getPatch() === location.hash.slice(1),
-    );
-    this.component.setChilds(!!current ? [current.getView()] : []);
+    const hash = location.hash;
+    const current = this.routes.find((i) => i.getRegExp().test(hash));
+    if (current) {
+      const args = current.getRegExp().exec(hash);
+      this.component.setChilds([current.getView(args?.slice(1) || [])]);
+    } else {
+      this.component.setChilds([]);
+    }
   }
 
   getComponent(): Component {
