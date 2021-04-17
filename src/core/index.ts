@@ -19,7 +19,10 @@ export function createBind(_value: any, _typeof?: string): Bind {
   return new Bind(_value, _typeof);
 }
 
-export function createRoute(path: string, view: (args: string[]) => Child): Route {
+export function createRoute(
+  path: string,
+  view: (args: string[]) => Child,
+): Route {
   return new Route(path, view);
 }
 
