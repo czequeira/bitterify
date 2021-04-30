@@ -4,7 +4,7 @@ describe('componts', () => {
   describe('a', () => {
     test('it should render a "a"', async () => {
       const code = `
-const anchor = bitterify.bitterA('link', 'https://example.com');
+const anchor = bitterify.a('link', 'https://example.com');
 
 bitterify.app([anchor]);
 `;
@@ -35,7 +35,7 @@ bitterify.app(['app']);
       const code = `
 const buttonBind = bitterify.bind('before click');
 
-const btn = bitterify.bitterButton(
+const btn = bitterify.button(
   () => (buttonBind.value = 'after click'),
   (bind) => bind.value,
   buttonBind,
@@ -63,10 +63,10 @@ bitterify.app([btn]);
 
     beforeEach(async () => {
       const code = `
-const div1 = bitterify.bitterDiv().setClasses('example', 'example2');
-const div2 = bitterify.bitterDiv().setClasses('example', 'example2');
-const div3 = bitterify.bitterDiv().addClasses('example3', 'example4');
-const div4 = bitterify.bitterDiv().addClasses('example3', 'example4');
+const div1 = bitterify.div().setClasses('example', 'example2');
+const div2 = bitterify.div().setClasses('example', 'example2');
+const div3 = bitterify.div().addClasses('example3', 'example4');
+const div4 = bitterify.div().addClasses('example3', 'example4');
 
 bitterify.app([div1, div2, div3, div4]);
 
@@ -99,8 +99,8 @@ div4.removeClasses('example4');
     beforeEach(async () => {
       const code = `
 bitterify.app([
-  bitterify.bitterSection([
-    bitterify.bitterDiv(['div 1', bitterify.bitterDiv([bitterify.bitterDiv(['div 3', bitterify.bitterArticle()])])]),
+  bitterify.section([
+    bitterify.div(['div 1', bitterify.div([bitterify.div(['div 3', bitterify.article()])])]),
   ]),
 ]);
 `;
@@ -131,12 +131,12 @@ bitterify.app([
     beforeEach(async () => {
       const code = `
 const Bind = bitterify.bind(null, 'string');
-const input = bitterify.bitterInput(Bind);
-const formItem = bitterify.bitterFormItem(input, {
+const input = bitterify.input(Bind);
+const formItem = bitterify.formItem(input, {
   pattern: '\\d+',
 });
-const button = bitterify.bitterButton(() => console.log('submited'), 'submit');
-const form = bitterify.bitterForm(
+const button = bitterify.button(() => console.log('submited'), 'submit');
+const form = bitterify.form(
   (e) => {
     e.preventDefault();
   },
@@ -170,9 +170,9 @@ bitterify.app([form]);
       const code = `
 const text = bitterify.bind('not changed');
 
-const input = bitterify.bitterInput(text, 'placeholder');
+const input = bitterify.input(text, 'placeholder');
 
-const p = bitterify.bitterP((bind) => [bind.value], text);
+const p = bitterify.p((bind) => [bind.value], text);
 
 bitterify.app([input, p]);
 `;
@@ -199,7 +199,7 @@ bitterify.app([input, p]);
   describe('layout', () => {
     test('it should render aside, nav and footer', async () => {
       const code = `
-bitterify.app([bitterify.bitterNav(), bitterify.bitterAside(), bitterify.bitterMain(), bitterify.bitterFooter()]);
+bitterify.app([bitterify.nav(), bitterify.aside(), bitterify.main(), bitterify.footer()]);
 `;
       const mounted = await mount(code);
 
@@ -215,15 +215,15 @@ bitterify.app([bitterify.bitterNav(), bitterify.bitterAside(), bitterify.bitterM
 
     beforeEach(async () => {
       const code = `
-const home = () => bitterify.bitterH1('Home');
-const about = () => bitterify.bitterH1('About');
-const hello = ([name]) => bitterify.bitterH1('Hello '+name);
+const home = () => bitterify.h1('Home');
+const about = () => bitterify.h1('About');
+const hello = ([name]) => bitterify.h1('Hello '+name);
 
-const aHome = bitterify.bitterA('Home', '#home');
-const aAbout = bitterify.bitterA('About', '#about');
-const aHello = bitterify.bitterA('Hello', '#hello/Bartolo');
+const aHome = bitterify.a('Home', '#home');
+const aAbout = bitterify.a('About', '#about');
+const aHello = bitterify.a('Hello', '#hello/Bartolo');
 
-const router = bitterify.bitterRouter([
+const router = bitterify.router([
   { path: 'home', view: home },
   { path: 'about', view: about },
   { path: 'hello/$', view: hello },
@@ -264,7 +264,7 @@ const data = bitterify.bind([
   ['Rozendo', '29'],
 ]);
 
-const Table = bitterify.bitterTable(data, [
+const Table = bitterify.table(data, [
   bitterify.tableColumn('name', (d) => d[0]),
   bitterify.tableColumn('age', (d) => d[1]),
 ]);
@@ -282,21 +282,21 @@ bitterify.app([Table]);
     test('it should mount all texts', async () => {
       const code = `
 bitterify.app([
-  bitterify.bitterP([
-    bitterify.bitterP(['p']),
-    bitterify.bitterB('b'),
-    bitterify.bitterI('i'),
-    bitterify.bitterH1('h1'),
-    bitterify.bitterH2('h2'),
-    bitterify.bitterH3('h3'),
-    bitterify.bitterH4('h4'),
-    bitterify.bitterH5('h5'),
-    bitterify.bitterH6('h6'),
-    bitterify.bitterEm('em'),
-    bitterify.bitterCode('code'),
-    bitterify.bitterPre('pre'),
-    bitterify.bitterStrong('strong'),
-    bitterify.bitterU('u'),
+  bitterify.p([
+    bitterify.p(['p']),
+    bitterify.b('b'),
+    bitterify.i('i'),
+    bitterify.h1('h1'),
+    bitterify.h2('h2'),
+    bitterify.h3('h3'),
+    bitterify.h4('h4'),
+    bitterify.h5('h5'),
+    bitterify.h6('h6'),
+    bitterify.em('em'),
+    bitterify.code('code'),
+    bitterify.pre('pre'),
+    bitterify.strong('strong'),
+    bitterify.u('u'),
   ]),
 ]);
 `;

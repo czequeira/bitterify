@@ -32,7 +32,7 @@ function createBody(bind: Bind, tableColumns: ITableColumn[]): Component {
   );
 }
 
-export function bitterTable(bind: Bind, tableColumns: ITableColumn[]): Component {
+export function table(bind: Bind, tableColumns: ITableColumn[]): Component {
   const thead = createComponent('thead', undefined, [
     createComponent(
       'tr',

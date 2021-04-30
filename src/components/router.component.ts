@@ -7,7 +7,7 @@ interface IRoute {
   view: (args: string[]) => Child;
 }
 
-export function bitterRouter(routes: IRoute[]): Component {
+export function router(routes: IRoute[]): Component {
   return createRouter(
     routes.map((i) => createRoute(i.path, i.view)),
   ).getComponent();

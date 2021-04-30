@@ -1,5 +1,5 @@
 import { createDinamicChilds } from './utils';
 
-export const bitterDiv = createDinamicChilds('div');
-export const bitterSection = createDinamicChilds('section');
-export const bitterArticle = createDinamicChilds('article');
+export const div = createDinamicChilds('div');
+export const section = createDinamicChilds('section');
+export const article = createDinamicChilds('article');

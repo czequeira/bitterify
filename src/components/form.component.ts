@@ -3,10 +3,7 @@ import { Component } from '../core/classes';
 import { Child } from '../core/types';
 import { IValidator } from './utils';
 
-export function bitterFormItem(
-  input: Component,
-  validator?: IValidator,
-): Component {
+export function formItem(input: Component, validator?: IValidator): Component {
   if (validator?.required) input.setAttribute('required', 'true');
   if (validator?.minlength)
     input.setAttribute('minlength', validator.minlength.toString());
@@ -19,7 +16,7 @@ export function bitterFormItem(
   return input;
 }
 
-export function bitterForm(
+export function form(
   submit: (event: Event) => void,
   formItems: Child[],
 ): Component {

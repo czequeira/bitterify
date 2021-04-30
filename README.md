@@ -64,10 +64,10 @@ now lets create a `h1` and a `paragraph`.
 to do this just import the components and use it
 
 ``` ts
-import { app, bitterH1, bitterP } from 'bitterify';
+import { app, h1, p } from 'bitterify';
 
-const title = bitterH1('title');
-const paragraph = bitterP(['this is a paragraph']);
+const title = h1('title');
+const paragraph = p(['this is a paragraph']);
 
 app([title, paragraph]);
 ```
@@ -77,16 +77,16 @@ app([title, paragraph]);
 Lets create a button and use the click method:
 
 ``` ts
-import { app, bitterButton } from 'bitterify';
+import { app, button } from 'bitterify';
 
-const btn = bitterButton(() => {
+const btn = button(() => {
   alert('button clicked');
 }, 'alert');
 
 app([btn]);
 ```
 
-For convenience, the `bitterButton` component receives the callback function of
+For convenience, the `button` component receives the callback function of
 the click event as the first parameter and the button text as the second parameter.
 
 ### Binds
@@ -95,20 +95,20 @@ A bind is a object to add reactive binds to the app,
 by example if we want change a text when we click a button:
 
 ``` ts
-import { app, bitterButton, bitterB, bind } from 'bitterify';
+import { app, button, b, bind } from 'bitterify';
 
 const count = bind(0);
 
-const btn = bitterButton(() => {
+const btn = button(() => {
   count.value += 1;
 }, 'plus one');
 
-const b = bitterB((c) => `Count: ${c.value}`, count);
+const bold = b((c) => `Count: ${c.value}`, count);
 
-app([btn, b]);
+app([btn, bold]);
 ```
 
-The `bitterB` function accepts either a string as the only parameter or a
+The `b` function accepts either a string as the only parameter or a
 function that accepts a `bind` as a parameter and returns a string and is
 passed the `bind` to inject as the second parameter.
 
@@ -123,12 +123,12 @@ or use the style property of the components.
 The next example show how to use the [Bulma][https://bulma.io/] framework.
 
 ``` ts
-import { app, bitterButton } from "bitterify";
+import { app, button } from "bitterify";
 
 const App = app();
 App.addLinks('https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css');
 
-const btn = bitterButton(() => {
+const btn = button(() => {
   alert('button clicked');
 }).setClasses('button');
 
@@ -137,25 +137,25 @@ App.setChilds(btn);
 
 #### Inputs
 
-The `bitterInput` component accepts two parameters, the `bind` where the input
+The `input` component accepts two parameters, the `bind` where the input
 value is stored and the placeholder.
 
 ``` ts
-import { app, bind, bitterInput, bitterP } from 'bitterify';
+import { app, bind, input, b } from 'bitterify';
 
 const text = bind('not changed');
 
-const input = bitterInput(text, 'placeholder');
+const Input = input(text, 'placeholder');
 
-const p = bitterP((bind) => [bind.value], text);
+const P = p((bind) => [bind.value], text);
 
-app([input, p]);
+app([Input, P]);
 ```
 
 #### Table
 
 ``` ts
-import { app, bind, bitterTable, tableColumn } from 'bitterify';
+import { app, bind, table, tableColumn } from 'bitterify';
 
 const data = bind([
   ['Bartolo', '100'],
@@ -163,12 +163,34 @@ const data = bind([
   ['Rozendo', '29'],
 ]);
 
-const Table = bitterTable(data, [
+const Table = table(data, [
   tableColumn('name', (d) => d[0]),
   tableColumn('age', (d) => d[1]),
 ]);
 
 app([Table]);
+```
+
+#### Router
+
+``` ts
+import { a, app, h1, router } from 'bitterify';
+
+const home = () => h1('Home');
+const about = () => h1('About');
+const hello = ([name]) => h1('Hello '+name);
+
+const aHome = a('Home', '#home');
+const aAbout = a('About', '#about');
+const aHello = a('Hello', '#hello/Bartolo');
+
+const router = router([
+  { path: 'home', view: home },
+  { path: 'about', view: about },
+  { path: 'hello/$', view: hello },
+]);
+
+bitterify.app([aHome, aAbout, aHello, router]);
 ```
 
 ## Deployment
@@ -181,9 +203,7 @@ The development server included create the html and bundle the app usin browseri
 
 - Add ssr deployment
 - Add cdn deployment
-- Add dinamic responsive breackpoints
 - Add more components:
-  - col
   - menu
-- Add a router
+  - list
 - Add life cicle hooks
