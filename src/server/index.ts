@@ -1,4 +1,5 @@
 import http from 'http';
+import fs from 'fs';
 import browserify from 'browserify';
 import tsify from 'tsify';
 import watchify from 'watchify';
@@ -27,10 +28,22 @@ export async function serve(port = 8080, file = 'src/index.ts') {
 
   bundle();
 
-  const httpServer = http.createServer((_, res) => {
-    const html = `<!DOCTYPE html><div id="app" /><script>${compiled}</script>`;
-    res.write(html);
-    res.end();
+  const httpServer = http.createServer((req, res) => {
+    if (req.url === '/') {
+      const html = `<!DOCTYPE html><div id="app" /><script>${compiled}</script>`;
+      res.write(html);
+      res.end();
+    } else {
+      fs.readFile(`public${req.url}`, (err, data) => {
+        if (err) {
+          res.writeHead(404);
+          res.end(JSON.stringify(err));
+        } else {
+          res.writeHead(200);
+          res.end(data);
+        }
+      });
+    }
   });
 
   httpServer.listen(port, () => {
