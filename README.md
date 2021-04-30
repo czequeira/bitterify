@@ -204,6 +204,7 @@ The development server included create the html and bundle the app usin browseri
 - Add ssr deployment
 - Add cdn deployment
 - Add more components:
-  - menu
   - list
+  - icons
 - Add life cicle hooks
+- Add test ecosystem
