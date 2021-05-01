@@ -10,3 +10,4 @@ export * from './app.component';
 export * from './a.component';
 export * from './dialog.component';
 export * from './router.component';
+export * from './list.component';

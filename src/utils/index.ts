@@ -17,3 +17,12 @@ export function getChilds(
   if (bind) return childs(bind);
   throw new BitterifyError('other error');
 }
+
+export function getStrings(
+  strings: string[] | ((bind: Bind) => string[]),
+  bind: Bind | undefined,
+): string[] {
+  if (typeof strings !== 'function') return strings;
+  if (bind) return strings(bind);
+  throw new BitterifyError('other error');
+}

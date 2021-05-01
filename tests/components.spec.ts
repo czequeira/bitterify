@@ -278,6 +278,28 @@ bitterify.app([Table]);
     });
   });
 
+  describe('list', () => {
+    test('it should mount all lists', async () => {
+      const code = `
+const Bind = bitterify.bind([0, 1, 2]);
+
+const Ul = bitterify.ul(b => b.value.map(i => 'item ' + i), Bind)
+
+bitterify.app([
+  bitterify.ol(['item 1', 'item 2', 'item 3']),
+  Ul
+]);
+`;
+      const mounted = await mount(code);
+
+      expect(mounted.querySelector('ol')).toBeTruthy();
+      expect(mounted.querySelectorAll('li')[1]?.innerText).toBe('item 2');
+
+      expect(mounted.querySelector('ul')).toBeTruthy();
+      expect(mounted.querySelectorAll('li')[5]?.innerText).toBe('item 2');
+    });
+  });
+
   describe('text', () => {
     test('it should mount all texts', async () => {
       const code = `

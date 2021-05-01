@@ -2,7 +2,7 @@ import { createComponent } from '../../core';
 import { Component, Bind } from '../../core/classes';
 import { BitterifyError } from '../../core/errors';
 import { Child } from '../../core/types';
-import { getChilds } from '../../utils';
+import { getChilds, getStrings } from '../../utils';
 
 export function createDinamicContent(htmlType: string) {
   function dinamicContent(content: string): Component;
@@ -45,6 +45,29 @@ export function createDinamicChilds(htmlType: string) {
     if (bind)
       bind.subscribeCallback('id', (bind: Bind) => {
         dinamicChildsComponent.setChilds(childs(bind));
+      });
+
+    return dinamicChildsComponent;
+  }
+
+  return dinamicChilds;
+}
+
+export function createDinamicList(htmlType: string) {
+  function dinamicChilds(strings: string[]): Component;
+  function dinamicChilds(
+    strings: (bind: Bind) => string[],
+    bind: Bind,
+  ): Component;
+  function dinamicChilds(strings: any = [], bind?: Bind): Component {
+    const lis = getStrings(strings, bind).map((i) => createComponent('li', i));
+    const dinamicChildsComponent = createComponent(htmlType, undefined, lis);
+
+    if (bind)
+      bind.subscribeCallback('id', (bind: Bind) => {
+        dinamicChildsComponent.setChilds(
+          strings(bind).map((i: string) => createComponent('li', i)),
+        );
       });
 
     return dinamicChildsComponent;
