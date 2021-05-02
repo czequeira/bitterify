@@ -55,7 +55,7 @@ your app will be serve at the url: `http://localhost:8080`, for mor options
 with the cli you can use:
 
 ``` sh
-node_modules/.bin/bitter serve --help
+node_modules/.bin/bitter --help
 ```
 
 ### Add more components

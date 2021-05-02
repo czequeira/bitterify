@@ -50,3 +50,30 @@ export async function serve(port = 8080, file = 'src/index.ts') {
     console.log(`bitterify server running at port ${port}`);
   });
 }
+
+export async function watch(file = 'src/index.ts', out: string) {
+  function bundle() {
+    console.log('compiling...');
+
+    b.bundle(function (err, buf) {
+      if (err) throw err;
+      fs.writeFile(out, buf.toString(), (err) => {
+        if (err) throw err;
+        console.log('saved');
+      });
+      console.log('compiled');
+    });
+  }
+
+  const b = browserify()
+    .add(file)
+    .plugin(tsify)
+    .plugin(watchify, {
+      delay: 100,
+      ignoreWatch: ['**/node_modules/**'],
+      poll: false,
+    })
+    .on('update', bundle);
+
+  bundle();
+}

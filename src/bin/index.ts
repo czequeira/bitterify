@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { serve } from '../server';
+import { serve, watch } from '../server';
 const program = new Command();
 
 program.version(process.env.npm_package_version || '0.0.0');
@@ -12,6 +12,15 @@ program
   .option('-f, --file <file>', 'File to compile', 'src/index.ts')
   .action(({ port, file }) => {
     serve(port, file);
+  });
+
+program
+  .command('watch')
+  .description('compile in develpment mode')
+  .option('-f, --file <file>', 'File to compile', 'src/index.ts')
+  .option('-o, --out <out>', 'file to save')
+  .action(({ file, out }) => {
+    watch(file, out);
   });
 
 program.parse(process.argv);
