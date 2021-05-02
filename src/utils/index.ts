@@ -9,6 +9,15 @@ export function getString(content: Content, bind: Bind | undefined): string {
   throw new BitterifyError('some error');
 }
 
+export function getChild(
+  child: Child | ((bind: Bind) => Child),
+  bind: Bind | undefined,
+): Child {
+  if (typeof child !== 'function') return child;
+  if (bind) return child(bind);
+  throw new BitterifyError('other error');
+}
+
 export function getChilds(
   childs: Child[] | ((bind: Bind) => Child[]),
   bind: Bind | undefined,
