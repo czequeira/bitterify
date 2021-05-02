@@ -1,7 +1,6 @@
 import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
-import { Child } from '../core/types';
-import { getChild } from '../utils';
+import { getString } from '../utils';
 
 export function input(bind: Bind, placeholder = ''): Component {
   const input = createComponent('input');
@@ -26,8 +25,21 @@ export function inputSubmit(
   bind: Bind,
 ): Component;
 export function inputSubmit(content: any, bind?: Bind): Component {
-  const input = createComponent('input', content, undefined, bind);
+  const input = createComponent('input');
   input.setAttribute('type', 'submit');
-  if (bind) input.subscribe(bind);
+  input.setAttribute('value', getString(content, bind));
+  if (bind) {
+    bind.subscribeCallback('bindinput', (b) => {
+      input.setAttribute('value', content(b));
+    });
+    input.subscribe(bind);
+  }
+  return input;
+}
+
+export function inputReset(content: string): Component {
+  const input = createComponent('reset');
+  input.setAttribute('type', 'submit');
+  input.setAttribute('value', content);
   return input;
 }
