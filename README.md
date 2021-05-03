@@ -195,7 +195,7 @@ bitterify.app([aHome, aAbout, aHello, router]);
 
 ## Deployment
 
-To deploy the app just need to create a `html` whith a `id = "app"`
+To deploy the app just need to create a `html` with a `id = "app"`
 tag and import a bundle of the app.
 The development server included create the html and bundle the app usin browserify.
 
@@ -207,3 +207,8 @@ The development server included create the html and bundle the app usin browseri
 - Add life cicle hooks
 - Add development live server
 - Add test ecosystem
+- Add components
+  - chekcboxs
+  - progress
+  - label
+- Add a table of components to the docs
