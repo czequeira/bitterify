@@ -60,8 +60,8 @@ export function inputSubmit(content: any, bind?: Bind): Component {
 }
 
 export function inputReset(content: string): Component {
-  const input = createComponent('reset');
-  input.setAttribute('type', 'submit');
+  const input = createComponent('input');
+  input.setAttribute('type', 'reset');
   input.setAttribute('value', content);
   return input;
 }
