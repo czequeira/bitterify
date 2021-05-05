@@ -199,40 +199,26 @@ bitterify.app([aHome, aAbout, aHello, router]);
 |-|-|-|
 |a|`content: string, href: string`|statics strings|
 ||`content: (bind: Bind) => string, href: string, bind: Bind`|dynamic content|
-||`content: (bind: Bind) => string, href: (bind: Bind) => string, bind: Bind`|
-dynamic content and href|
-|button|`fn: () => void, content: string`|callback function to event click and
-static content|
-||`fn: () => void, content: (bind: Bind) => string, bind: Bind`|callback
-function to click event and dynamic content|
-|dialog|`visible: Bind, children: Child[]`|boolean bind to sync the visible
-state and static children|
-||`visible: Bind, childs: (bind: Bind) => Child[], bind: Bind`|boolean bind to
-sync the visible state and dynamic children|
-|div, section, article, aside, header, nav, footer, main, p|`children: Child[]`|
-static children|
+||`content: (bind: Bind) => string, href: (bind: Bind) => string, bind: Bind`|dynamic content and href|
+|button|`fn: () => void, content: string`|callback function to event click andstatic content|
+||`fn: () => void, content: (bind: Bind) => string, bind: Bind`|callback function to click event and dynamic content|
+|dialog|`visible: Bind, children: Child[]`|boolean bind to sync the visible state and static children|
+||`visible: Bind, childs: (bind: Bind) => Child[], bind: Bind`|boolean bind to sync the visible state and dynamic children|
+|div, section, article, aside, header, nav, footer, main, p|`children: Child[]`|static children|
 ||`children: (bind: Bind) => Child[], bind: Bind`|dynamic children|
-|formItem|`input: Component, validator: IValidator`|the input and the
-validators rules|
-|form|`submit: (event: Event) => void, formItems: Child[]`|callback function
-to submit event and children|
-|input, inputPassword, inputEmail, inputHidden, inputNumber, inputSearch,
-inputUrl|`bind: Bind, placeholder = ''`|the bind to the value of the input
-and a optional placeholder|
-|inputDate, inputTime, inputDatetimeLocal, inputFile, inputRange,
-inputCheckbox, inputColor|`bind: Bind`|the bind to the value attribute|
+|formItem|`input: Component, validator: IValidator`|the input and the validators rules|
+|form|`submit: (event: Event) => void, formItems: Child[]`|callback function to submit event and children|
+|input, inputPassword, inputEmail, inputHidden, inputNumber, inputSearch, inputUrl|`bind: Bind, placeholder = ''`|the bind to the value of the input and a optional placeholder|
+|inputDate, inputTime, inputDatetimeLocal, inputFile, inputRange, inputCheckbox, inputColor|`bind: Bind`|the bind to the value attribute|
 |inputSubmit|`content: string`|static content of the submit button|
 ||`content: (bind: Bind) => string, bind: Bind`|dynamic content to the submit button|
 |inputReset|`content: string`|static content to the reset button|
 |ol, ul|`strings: string[]`|static string to create the `<li>` items|
 ||`(bind: Bind) => string[], bind: Bind`|dynamic `<li>` items|
 |router|`routes: IRoute[]`|the collection of routes|
-|tableColumn|`header: string, body: (arg: any) => Child`|the header of a table
-column and the function to populate a cell of the column|
-|table|`bind: Bind, tableColumn: ITableColumn`|the data array to create the
-table and de columns|
-|b, i, h1, h2, h3, h4, h5, h6, em, code, pre, strong, u|`content: string`|
-static content|
+|tableColumn|`header: string, body: (arg: any) => Child`|the header of a table column and the function to populate a cell of the column|
+|table|`bind: Bind, tableColumn: ITableColumn`|the data array to create the table and de columns|
+|b, i, h1, h2, h3, h4, h5, h6, em, code, pre, strong, u|`content: string`|static content|
 ||`content: (bind: Bind) => string, bind: Bind`|dynamic content|
 
 ## Deployment
