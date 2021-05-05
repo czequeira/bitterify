@@ -21,7 +21,7 @@
     "bitter": "lib/bin/index.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/browserify": "^12.0.36",
     "@types/jest": "^26.0.22",
