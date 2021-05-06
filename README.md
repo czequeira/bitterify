@@ -132,7 +132,7 @@ const btn = button(() => {
   alert('button clicked');
 }).setClasses('button');
 
-App.setChilds(btn);
+App.setChildren(btn);
 ```
 
 #### Inputs

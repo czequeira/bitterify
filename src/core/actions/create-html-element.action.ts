@@ -1,7 +1,7 @@
 import { getString } from '../../utils';
 import { Component, Bind } from '../classes';
 import { Content, HtmlElement } from '../types';
-import { appendChilds } from './append-childs.action';
+import { appendChildren } from './append-children.action';
 
 export function createHtmlElement(
   htmlType: string,
@@ -15,7 +15,7 @@ export function createHtmlElement(
   if (htmlType !== 'text') {
     htmlElement = document.createElement(htmlType);
     htmlElement.innerText = textContent;
-    appendChilds(htmlElement, childs);
+    appendChildren(htmlElement, childs);
   } else htmlElement = document.createTextNode(textContent);
 
   return htmlElement;

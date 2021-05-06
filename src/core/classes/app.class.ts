@@ -1,4 +1,4 @@
-import { appendChilds } from '../actions';
+import { appendChildren } from '../actions';
 import { MountError } from '../errors/mount.error';
 import { Links } from '../types';
 import { Bind } from './bind.class';
@@ -9,11 +9,11 @@ export class App {
   private htmlElement: HTMLElement;
   // private binds: { [name: string]: Bind } = {};
 
-  constructor(private childs: Component[] = [], mountPoint = 'app') {
+  constructor(private children: Component[] = [], mountPoint = 'app') {
     const htmlElement = document.getElementById(mountPoint);
     if (htmlElement === null) throw new MountError(mountPoint);
     this.htmlElement = htmlElement;
-    appendChilds(htmlElement, childs);
+    appendChildren(htmlElement, children);
   }
 
   addLinks(links: Links): void {
@@ -27,9 +27,9 @@ export class App {
     });
   }
 
-  setChilds(childs: Component[]): void {
-    this.childs = childs;
-    appendChilds(this.htmlElement, childs);
+  setChildren(children: Component[]): void {
+    this.children = children;
+    appendChildren(this.htmlElement, children);
   }
 
   // createBind(name: string, value: any = null): Bind {

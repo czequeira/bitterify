@@ -1,4 +1,4 @@
-import { createHtmlElement, refreshContent, setChilds } from '../actions';
+import { createHtmlElement, refreshContent, setChildren } from '../actions';
 import { Child, Content, Fn, HtmlElement } from '../types';
 import { Bind } from './bind.class';
 import { Event } from './event.class';
@@ -11,10 +11,10 @@ export class Component {
   constructor(
     private htmlType = 'text',
     private content: Content = '',
-    childs: Component[] = [],
+    children: Component[] = [],
     bind?: Bind,
   ) {
-    this.htmlElement = createHtmlElement(htmlType, content, childs, bind);
+    this.htmlElement = createHtmlElement(htmlType, content, children, bind);
     if (this.htmlElement instanceof HTMLElement)
       this.style = this.htmlElement.style;
   }
@@ -27,8 +27,8 @@ export class Component {
     return this.htmlType;
   }
 
-  setChilds(childs: Child[]): Component {
-    setChilds(this.htmlElement, childs);
+  setChilds(children: Child[]): Component {
+    setChildren(this.htmlElement, children);
     return this;
   }
 

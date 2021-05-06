@@ -43,7 +43,7 @@ const b = bitterify.core.createComponent(
 );
 b.subscribe(bind2);
 
-app.setChilds([p, b]);
+app.setChildren([p, b]);
 
 bind.value = 'changed';
 `;
@@ -63,7 +63,7 @@ const button = bitterify.core.createComponent('button', (bind) => bind.value, un
 button.addEvent('click', () => (bind.value = 'clicked'));
 
 button.subscribe(bind);
-app.setChilds([button]);
+app.setChildren([button]);
 `;
       const mounted = await mount(code);
 
