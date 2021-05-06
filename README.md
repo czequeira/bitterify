@@ -220,6 +220,7 @@ bitterify.app([aHome, aAbout, aHello, router]);
 |table|`bind: Bind, tableColumn: ITableColumn`|the data array to create the table and de columns|
 |b, i, h1, h2, h3, h4, h5, h6, em, code, pre, strong, u|`content: string`|static content|
 ||`content: (bind: Bind) => string, bind: Bind`|dynamic content|
+|progress|`bind: Bind`|the bind to the value attribute|
 
 ## Deployment
 
@@ -236,7 +237,5 @@ The development server included create the html and bundle the app using browser
 - Add development live server
 - Add test ecosystem
 - Add components
-  - chekcboxs
-  - progress
+  - radio
   - label
-- Add a table of components to the docs

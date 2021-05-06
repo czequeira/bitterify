@@ -340,4 +340,22 @@ bitterify.app([
       expect(mounted.querySelector('u')?.innerText).toBe('u');
     });
   });
+
+  describe('progress', () => {
+    test('it should mount a progress', async () => {
+      const code = `
+const progressBind = bitterify.bind(10);
+const Progress = bitterify.progress(progressBind);
+bitterify.app([
+  Progress
+]);
+
+progressBind.value = 50;
+`;
+      const mounted = await mount(code);
+
+      expect(mounted.querySelector('progress')).toBeTruthy();
+      expect(mounted.querySelector('progress')?.getAttribute('value')).toBe('50');
+    });
+  });
 });
