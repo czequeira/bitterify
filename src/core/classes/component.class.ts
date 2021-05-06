@@ -49,21 +49,21 @@ export class Component {
       return this.htmlElement.getAttribute(key);
   }
 
-  setClasses(...classes: string[]): Component {
+  setClasses(classes: string): Component {
     if (this.htmlElement instanceof HTMLElement)
-      this.htmlElement.className = classes.join(' ');
+      this.htmlElement.className = classes;
     return this;
   }
 
-  addClasses(...classes: string[]): Component {
+  addClasses(classes: string): Component {
     if (this.htmlElement instanceof HTMLElement)
-      this.htmlElement.classList.add(...classes);
+      this.htmlElement.classList.add(...classes.split(' '));
     return this;
   }
 
-  removeClasses(...classes: string[]): Component {
+  removeClasses(classes: string): Component {
     if (this.htmlElement instanceof HTMLElement)
-      this.htmlElement.classList.remove(...classes);
+      this.htmlElement.classList.remove(...classes.split(' '));
     return this;
   }
 

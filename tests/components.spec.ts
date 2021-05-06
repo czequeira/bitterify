@@ -63,10 +63,10 @@ bitterify.app([btn]);
 
     beforeEach(async () => {
       const code = `
-const div1 = bitterify.div().setClasses('example', 'example2');
-const div2 = bitterify.div().setClasses('example', 'example2');
-const div3 = bitterify.div().addClasses('example3', 'example4');
-const div4 = bitterify.div().addClasses('example3', 'example4');
+const div1 = bitterify.div().setClasses('example example2');
+const div2 = bitterify.div().setClasses('example example2');
+const div3 = bitterify.div().addClasses('example3 example4');
+const div4 = bitterify.div().addClasses('example3 example4');
 
 bitterify.app([div1, div2, div3, div4]);
 
