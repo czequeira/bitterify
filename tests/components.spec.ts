@@ -356,4 +356,49 @@ progressBind.value = 50;
       );
     });
   });
+
+  describe('life cycle hooks', () => {
+    test('it should exec the onMounted and the onUnmount', async () => {
+      const code = `
+const Bind = bitterify.bind(true);
+const Button = bitterify.button(() => Bind.value = !Bind.value);
+
+const B = bitterify.b('funciona')
+  .onMounted(() => Button.setStyle('background', 'red'))
+  .onUnmount(() => Button.setStyle('background', 'yellow'));
+
+const P = bitterify.p((b) => b.value ? [B] : [], Bind);
+
+bitterify.app([P, Button]);
+`;
+      const mounted = await mount(code);
+
+      const button = mounted.querySelector('button');
+      expect(button?.style.background).toBe('red');
+      button?.click();
+      expect(button?.style.background).toBe('yellow');
+    });
+
+    test('it should exec the before and after update', async (done) => {
+      const code = `
+const Bind = bitterify.bind(2);
+const Button = bitterify.button(() => Bind.value = Bind.value + 1);
+
+const B = bitterify.b((b) => 'width' + b.value, Bind)
+  .onBeforeUpdate(() => Button.setStyle('width', Bind.value + 'px'))
+  .onAfterUpdate(() => Button.setStyle('background', 'red'));
+
+bitterify.app([B, Button]);
+`;
+      const mounted = await mount(code);
+
+      const button = mounted.querySelector('button');
+      button?.click();
+      setTimeout(() => {
+        expect(button?.style.background).toBe('red');
+        expect(button?.style.width).toBe('3px');
+        done();
+      }, 100);
+    });
+  });
 });

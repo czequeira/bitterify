@@ -14,6 +14,7 @@ export class App {
     if (htmlElement === null) throw new MountError(mountPoint);
     this.htmlElement = htmlElement;
     appendChildren(htmlElement, children);
+    children.forEach((child) => child.execMountedCallback());
   }
 
   addLinks(links: Links): void {
@@ -30,6 +31,7 @@ export class App {
   setChildren(children: Component[]): void {
     // this.children = children;
     appendChildren(this.htmlElement, children);
+    children.forEach((child) => child.execMountedCallback());
   }
 
   // createBind(name: string, value: any = null): Bind {

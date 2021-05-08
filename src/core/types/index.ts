@@ -12,6 +12,8 @@ export type Children = Child[] | ((bind: Bind) => Child[]);
 
 export type Fn = (...args: any[]) => any;
 
+export type Callback = () => void | Promise<void>;
+
 export type Links = Array<ILink | string>;
 
 interface ICallbackSubscribed {

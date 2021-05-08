@@ -1,5 +1,5 @@
 import { createHtmlElement, refreshContent, setChildren } from '../actions';
-import { Child, Content, Fn, HtmlElement } from '../types';
+import { Callback, Child, Content, Fn, HtmlElement } from '../types';
 import { Bind } from './bind.class';
 import { Event } from './event.class';
 
@@ -7,14 +7,19 @@ export class Component {
   private htmlElement: HtmlElement;
   private style: CSSStyleDeclaration | undefined;
   // private events: { [name: string]: Event } = {};
+  private mountedCallback: Callback | undefined;
+  private unmountCallback: Callback | undefined;
+  private beforeUpdateCallback: Callback | undefined;
+  private afterUpdateCallback: Callback | undefined;
 
   constructor(
     private htmlType = 'text',
     private content: Content = '',
-    children: Component[] = [],
+    private children: Component[] = [],
     bind?: Bind,
   ) {
     this.htmlElement = createHtmlElement(htmlType, content, children, bind);
+    this.children.forEach((child) => child.execMountedCallback());
     if (this.htmlElement instanceof HTMLElement)
       this.style = this.htmlElement.style;
   }
@@ -28,7 +33,15 @@ export class Component {
   }
 
   setChildren(children: Child[]): Component {
+    this.children.forEach((child) => child.execUnmountCallback());
     setChildren(this.htmlElement, children);
+    this.children = children.map((child) => {
+      if (child instanceof Component) {
+        child.execMountedCallback();
+        return child;
+      }
+      return new Component('text', child);
+    });
     return this;
   }
 
@@ -80,7 +93,38 @@ export class Component {
     return this;
   }
 
-  refreshContent(bind: Bind): void {
+  async refreshContent(bind: Bind): Promise<void> {
+    if (this.beforeUpdateCallback) await this.beforeUpdateCallback();
     refreshContent(this.htmlElement, this.content, bind);
+    if (this.afterUpdateCallback) await this.afterUpdateCallback();
+  }
+
+  // Life cycle hooks
+  onMounted(callback: Callback): Component {
+    this.mountedCallback = callback;
+    return this;
+  }
+
+  onUnmount(callback: Callback): Component {
+    this.unmountCallback = callback;
+    return this;
+  }
+
+  onBeforeUpdate(callback: Callback): Component {
+    this.beforeUpdateCallback = callback;
+    return this;
+  }
+
+  onAfterUpdate(callback: Callback): Component {
+    this.afterUpdateCallback = callback;
+    return this;
+  }
+
+  async execMountedCallback(): Promise<void> {
+    if (this.mountedCallback) await this.mountedCallback();
+  }
+
+  async execUnmountCallback(): Promise<void> {
+    if (this.unmountCallback) await this.unmountCallback();
   }
 }
