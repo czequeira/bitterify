@@ -1,7 +1,7 @@
 import { createComponent } from '../../core';
 import { Component, Bind } from '../../core/classes';
 import { BitterifyError } from '../../core/errors';
-import { Child } from '../../core/types';
+import { Child, Children, Content, Contents } from '../../core/types';
 import { getChildren, getStrings } from '../../utils';
 
 export function createDinamicContent(htmlType: string) {
@@ -10,7 +10,7 @@ export function createDinamicContent(htmlType: string) {
     content: (bind: Bind) => string,
     bind: Bind,
   ): Component;
-  function dinamicContent(content: any, bind?: Bind): Component {
+  function dinamicContent(content: Content, bind?: Bind): Component {
     if (typeof content === 'string') return createComponent(htmlType, content);
     if (bind) {
       const dinamicContentComponent = createComponent(
@@ -35,14 +35,14 @@ export function createDinamicChildren(htmlType: string) {
     children: (bind: Bind) => Child[],
     bind: Bind,
   ): Component;
-  function dinamicChildren(children: any = [], bind?: Bind): Component {
+  function dinamicChildren(children: Children = [], bind?: Bind): Component {
     const dinamicChildrenComponent = createComponent(
       htmlType,
       undefined,
       getChildren(children, bind),
     );
 
-    if (bind)
+    if (bind && typeof children === 'function')
       bind.subscribeCallback('id', (bind: Bind) => {
         dinamicChildrenComponent.setChildren(children(bind));
       });
@@ -59,11 +59,11 @@ export function createDinamicList(htmlType: string) {
     strings: (bind: Bind) => string[],
     bind: Bind,
   ): Component;
-  function dinamicChildren(strings: any = [], bind?: Bind): Component {
+  function dinamicChildren(strings: Contents = [], bind?: Bind): Component {
     const lis = getStrings(strings, bind).map((i) => createComponent('li', i));
     const dinamicChildrenComponent = createComponent(htmlType, undefined, lis);
 
-    if (bind)
+    if (bind && typeof strings === 'function')
       bind.subscribeCallback('id', (bind: Bind) => {
         dinamicChildrenComponent.setChildren(
           strings(bind).map((i: string) => createComponent('li', i)),

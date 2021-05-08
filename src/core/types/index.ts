@@ -4,6 +4,10 @@ export type HtmlElement = HTMLElement | Text;
 
 export type Content = string | ((bind: Bind) => string);
 
+export type Contents = string[] | ((bind: Bind) => string[]);
+
+export type Children = Child[] | ((bind: Bind) => Child[]);
+
 export type Fn = (...args: any[]) => any;
 
 export type Child = Component | Content;

@@ -1,6 +1,6 @@
 import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
-import { Child } from '../core/types';
+import { Child, Children } from '../core/types';
 import { getChildren } from '../utils';
 
 export function dialog(visible: Bind, children: Child[]): Component;
@@ -9,7 +9,11 @@ export function dialog(
   children: (bind: Bind) => Child[],
   bind: Bind,
 ): Component;
-export function dialog(visible: Bind, children: any, bind?: Bind): Component {
+export function dialog(
+  visible: Bind,
+  children: Children,
+  bind?: Bind,
+): Component {
   const modal = createComponent(
     'dialog',
     undefined,

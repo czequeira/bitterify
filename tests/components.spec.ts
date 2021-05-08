@@ -135,12 +135,11 @@ const input = bitterify.input(Bind);
 const formItem = bitterify.formItem(input, {
   pattern: '\\d+',
 });
-const button = bitterify.button(() => console.log('submited'), 'submit');
 const form = bitterify.form(
   (e) => {
     e.preventDefault();
   },
-  [formItem, button],
+  [formItem],
 );
 
 bitterify.app([form]);
@@ -155,9 +154,6 @@ bitterify.app([form]);
     test('it should validate the form', () => {
       const input = mounted.querySelector('input');
       if (input instanceof HTMLInputElement) input.value = 'invalid';
-
-      const submit = mounted.querySelector('button');
-      submit?.click();
 
       expect(input?.matches(':invalid')).toBe(true);
     });
@@ -355,7 +351,9 @@ progressBind.value = 50;
       const mounted = await mount(code);
 
       expect(mounted.querySelector('progress')).toBeTruthy();
-      expect(mounted.querySelector('progress')?.getAttribute('value')).toBe('50');
+      expect(mounted.querySelector('progress')?.getAttribute('value')).toBe(
+        '50',
+      );
     });
   });
 });
