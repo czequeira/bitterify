@@ -6,17 +6,17 @@ export type Content = string | ((bind: Bind) => string);
 
 export type Contents = string[] | ((bind: Bind) => string[]);
 
+export type Child = Component | string;
+
 export type Children = Child[] | ((bind: Bind) => Child[]);
 
 export type Fn = (...args: any[]) => any;
-
-export type Child = Component | Content;
 
 export type Links = Array<ILink | string>;
 
 interface ICallbackSubscribed {
   id: string;
-  callback: (bind: Bind) => void;
+  callback: (bind: Bind) => void | Promise<void>;
 }
 
 export type Subscriber = Component | ICallbackSubscribed;
