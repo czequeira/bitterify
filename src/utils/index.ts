@@ -18,12 +18,12 @@ export function getChild(
   throw new BitterifyError('other error');
 }
 
-export function getChilds(
-  childs: Child[] | ((bind: Bind) => Child[]),
+export function getChildren(
+  children: Child[] | ((bind: Bind) => Child[]),
   bind: Bind | undefined,
 ): Child[] {
-  if (typeof childs !== 'function') return childs;
-  if (bind) return childs(bind);
+  if (typeof children !== 'function') return children;
+  if (bind) return children(bind);
   throw new BitterifyError('other error');
 }
 

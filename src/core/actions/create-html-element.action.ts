@@ -6,7 +6,7 @@ import { appendChildren } from './append-children.action';
 export function createHtmlElement(
   htmlType: string,
   content: Content,
-  childs: Component[],
+  children: Component[],
   bind?: Bind,
 ): HtmlElement {
   let htmlElement: HtmlElement;
@@ -15,7 +15,7 @@ export function createHtmlElement(
   if (htmlType !== 'text') {
     htmlElement = document.createElement(htmlType);
     htmlElement.innerText = textContent;
-    appendChildren(htmlElement, childs);
+    appendChildren(htmlElement, children);
   } else htmlElement = document.createTextNode(textContent);
 
   return htmlElement;

@@ -1,6 +1,6 @@
-import { createDinamicChilds, createDinamicContent } from './utils';
+import { createDinamicChildren, createDinamicContent } from './utils';
 
-export const p = createDinamicChilds('p');
+export const p = createDinamicChildren('p');
 export const b = createDinamicContent('b');
 export const i = createDinamicContent('i');
 export const h1 = createDinamicContent('h1');

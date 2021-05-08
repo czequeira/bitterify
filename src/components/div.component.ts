@@ -1,5 +1,5 @@
-import { createDinamicChilds } from './utils';
+import { createDinamicChildren } from './utils';
 
-export const div = createDinamicChilds('div');
-export const section = createDinamicChilds('section');
-export const article = createDinamicChilds('article');
+export const div = createDinamicChildren('div');
+export const section = createDinamicChildren('section');
+export const article = createDinamicChildren('article');

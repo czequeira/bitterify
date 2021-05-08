@@ -48,9 +48,9 @@ export class Router {
     const current = this.routes.find((i) => i.getRegExp().test(hash));
     if (current) {
       const args = current.getRegExp().exec(hash);
-      this.component.setChilds([current.getView(args?.slice(1) || [])]);
+      this.component.setChildren([current.getView(args?.slice(1) || [])]);
     } else {
-      this.component.setChilds([]);
+      this.component.setChildren([]);
     }
   }
 

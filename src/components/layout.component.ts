@@ -1,7 +1,7 @@
-import { createDinamicChilds } from './utils';
+import { createDinamicChildren } from './utils';
 
-export const aside = createDinamicChilds('aside');
-export const header = createDinamicChilds('header');
-export const nav = createDinamicChilds('nav');
-export const footer = createDinamicChilds('footer');
-export const main = createDinamicChilds('main');
+export const aside = createDinamicChildren('aside');
+export const header = createDinamicChildren('header');
+export const nav = createDinamicChildren('nav');
+export const footer = createDinamicChildren('footer');
+export const main = createDinamicChildren('main');

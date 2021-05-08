@@ -2,7 +2,7 @@ import { createComponent } from '../../core';
 import { Component, Bind } from '../../core/classes';
 import { BitterifyError } from '../../core/errors';
 import { Child } from '../../core/types';
-import { getChilds, getStrings } from '../../utils';
+import { getChildren, getStrings } from '../../utils';
 
 export function createDinamicContent(htmlType: string) {
   function dinamicContent(content: string): Component;
@@ -28,52 +28,52 @@ export function createDinamicContent(htmlType: string) {
   return dinamicContent;
 }
 
-export function createDinamicChilds(htmlType: string) {
-  function dinamicChilds(): Component;
-  function dinamicChilds(childs: Child[]): Component;
-  function dinamicChilds(
-    childs: (bind: Bind) => Child[],
+export function createDinamicChildren(htmlType: string) {
+  function dinamicChildren(): Component;
+  function dinamicChildren(children: Child[]): Component;
+  function dinamicChildren(
+    children: (bind: Bind) => Child[],
     bind: Bind,
   ): Component;
-  function dinamicChilds(childs: any = [], bind?: Bind): Component {
-    const dinamicChildsComponent = createComponent(
+  function dinamicChildren(children: any = [], bind?: Bind): Component {
+    const dinamicChildrenComponent = createComponent(
       htmlType,
       undefined,
-      getChilds(childs, bind),
+      getChildren(children, bind),
     );
 
     if (bind)
       bind.subscribeCallback('id', (bind: Bind) => {
-        dinamicChildsComponent.setChilds(childs(bind));
+        dinamicChildrenComponent.setChildren(children(bind));
       });
 
-    return dinamicChildsComponent;
+    return dinamicChildrenComponent;
   }
 
-  return dinamicChilds;
+  return dinamicChildren;
 }
 
 export function createDinamicList(htmlType: string) {
-  function dinamicChilds(strings: string[]): Component;
-  function dinamicChilds(
+  function dinamicChildren(strings: string[]): Component;
+  function dinamicChildren(
     strings: (bind: Bind) => string[],
     bind: Bind,
   ): Component;
-  function dinamicChilds(strings: any = [], bind?: Bind): Component {
+  function dinamicChildren(strings: any = [], bind?: Bind): Component {
     const lis = getStrings(strings, bind).map((i) => createComponent('li', i));
-    const dinamicChildsComponent = createComponent(htmlType, undefined, lis);
+    const dinamicChildrenComponent = createComponent(htmlType, undefined, lis);
 
     if (bind)
       bind.subscribeCallback('id', (bind: Bind) => {
-        dinamicChildsComponent.setChilds(
+        dinamicChildrenComponent.setChildren(
           strings(bind).map((i: string) => createComponent('li', i)),
         );
       });
 
-    return dinamicChildsComponent;
+    return dinamicChildrenComponent;
   }
 
-  return dinamicChilds;
+  return dinamicChildren;
 }
 
 export interface IValidator {

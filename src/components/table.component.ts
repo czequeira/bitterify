@@ -45,7 +45,7 @@ export function table(bind: Bind, tableColumns: ITableColumn[]): Component {
 
   bind.subscribeCallback('id', (data) => {
     tbody = createBody(data, tableColumns);
-    table.setChilds([thead, tbody]);
+    table.setChildren([thead, tbody]);
   });
 
   return table;

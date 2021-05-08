@@ -27,7 +27,7 @@ export class Component {
     return this.htmlType;
   }
 
-  setChilds(children: Child[]): Component {
+  setChildren(children: Child[]): Component {
     setChildren(this.htmlElement, children);
     return this;
   }

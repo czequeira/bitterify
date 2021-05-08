@@ -2,17 +2,17 @@ import { childToComponent } from './actions';
 import { App, Bind, Component, Route, Router } from './classes';
 import { Child, Content } from './types';
 
-export function createApp(childs: Child[]): App {
-  return new App(childs.map(childToComponent));
+export function createApp(children: Child[]): App {
+  return new App(children.map(childToComponent));
 }
 
 export function createComponent(
   htmlType: string,
   content?: Content,
-  childs: Child[] = [],
+  children: Child[] = [],
   bind?: Bind,
 ): Component {
-  return new Component(htmlType, content, childs.map(childToComponent), bind);
+  return new Component(htmlType, content, children.map(childToComponent), bind);
 }
 
 export function createBind(_value: any, _typeof?: string): Bind {

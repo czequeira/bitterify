@@ -203,7 +203,7 @@ bitterify.app([aHome, aAbout, aHello, router]);
 |button|`fn: () => void, content: string`|callback function to event click andstatic content|
 ||`fn: () => void, content: (bind: Bind) => string, bind: Bind`|callback function to click event and dynamic content|
 |dialog|`visible: Bind, children: Child[]`|boolean bind to sync the visible state and static children|
-||`visible: Bind, childs: (bind: Bind) => Child[], bind: Bind`|boolean bind to sync the visible state and dynamic children|
+||`visible: Bind, children: (bind: Bind) => Child[], bind: Bind`|boolean bind to sync the visible state and dynamic children|
 |div, section, article, aside, header, nav, footer, main, p|`children: Child[]`|static children|
 ||`children: (bind: Bind) => Child[], bind: Bind`|dynamic children|
 |formItem|`input: Component, validator: IValidator`|the input and the validators rules|
