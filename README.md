@@ -190,7 +190,26 @@ const router = router([
   { path: 'hello/$', view: hello },
 ]);
 
-bitterify.app([aHome, aAbout, aHello, router]);
+app([aHome, aAbout, aHello, router]);
+```
+
+## Life cycle hooks
+
+The life cycle hooks of a bitterify component are:
+
+- onMounted:
+  - runs after the component is mounted.
+- onUnmount
+  - runs when the component is to be dismounted.
+- onBeforeUpdate and onAfterUpdate:
+  - runs before and after updating the component.
+
+``` ts
+import { app, b } from 'bitterify';
+
+const B = b('Hello').onMounted(() => console.log('mounted'));
+
+app(B);
 ```
 
 ## Componets
@@ -233,7 +252,6 @@ The development server included create the html and bundle the app using browser
 - Add ssr deployment
 - Add cdn deployment
 - Add production deployment
-- Add life cycle hooks
 - Add development live server
 - Add test ecosystem
 - Add components
