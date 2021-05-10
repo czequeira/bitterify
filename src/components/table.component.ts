@@ -1,3 +1,4 @@
+import uuid from 'uuid-random';
 import { createComponent } from '../core';
 import { Bind, Component } from '../core/classes';
 import { BitterifyError } from '../core/errors';
@@ -43,10 +44,12 @@ export function table(bind: Bind, tableColumns: ITableColumn[]): Component {
   let tbody = createBody(bind, tableColumns);
   const table = createComponent('table', undefined, [thead, tbody]);
 
-  bind.subscribeCallback('id', (data) => {
+  const id = uuid();
+  bind.subscribeCallback(id, (data) => {
     tbody = createBody(data, tableColumns);
     table.setChildren([thead, tbody]);
   });
+  table.onUnmount(() => bind.unsubscribe(id));
 
   return table;
 }

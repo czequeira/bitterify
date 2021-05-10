@@ -1,3 +1,4 @@
+import uuid from 'uuid-random';
 import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
 import { Content } from '../core/types';
@@ -23,11 +24,17 @@ export function a(content: Content, href: Content, bind?: Bind): Component {
   const a = createComponent('a', content, undefined, bind);
   a.setAttribute('href', getString(href, bind));
   if (bind) {
-    if (typeof content === 'function') a.subscribe(bind);
-    if (typeof href === 'function')
-      bind.subscribeCallback('id', (b: Bind) => {
+    if (typeof content === 'function') {
+      a.subscribe(bind);
+      a.onUnmount(() => bind.unsubscribe(a.getId()));
+    }
+    if (typeof href === 'function') {
+      const id = uuid();
+      bind.subscribeCallback(id, (b: Bind) => {
         a.setAttribute('href', href(b));
       });
+      a.onUnmount(() => bind.unsubscribe(id));
+    }
   }
   return a;
 }

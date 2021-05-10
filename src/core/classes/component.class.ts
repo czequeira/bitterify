@@ -9,10 +9,10 @@ export class Component {
   private htmlElement: HtmlElement;
   private style: CSSStyleDeclaration | undefined;
   // private events: { [name: string]: Event } = {};
-  private mountedCallback: Callback | undefined;
-  private unmountCallback: Callback | undefined;
-  private beforeUpdateCallback: Callback | undefined;
-  private afterUpdateCallback: Callback | undefined;
+  private mountedCallback: Callback[] = [];
+  private unmountCallback: Callback[] = [];
+  private beforeUpdateCallback: Callback[] = [];
+  private afterUpdateCallback: Callback[] = [];
 
   constructor(
     private htmlType = 'text',
@@ -101,37 +101,37 @@ export class Component {
   }
 
   async refreshContent(bind: Bind): Promise<void> {
-    if (this.beforeUpdateCallback) await this.beforeUpdateCallback();
+    for (const callback of this.beforeUpdateCallback) await callback();
     refreshContent(this.htmlElement, this.content, bind);
-    if (this.afterUpdateCallback) await this.afterUpdateCallback();
+    for (const callback of this.afterUpdateCallback) await callback();
   }
 
   // Life cycle hooks
   onMounted(callback: Callback): Component {
-    this.mountedCallback = callback;
+    this.mountedCallback.push(callback);
     return this;
   }
 
   onUnmount(callback: Callback): Component {
-    this.unmountCallback = callback;
+    this.unmountCallback.push(callback);
     return this;
   }
 
   onBeforeUpdate(callback: Callback): Component {
-    this.beforeUpdateCallback = callback;
+    this.beforeUpdateCallback.push(callback);
     return this;
   }
 
   onAfterUpdate(callback: Callback): Component {
-    this.afterUpdateCallback = callback;
+    this.afterUpdateCallback.push(callback);
     return this;
   }
 
   async execMountedCallback(): Promise<void> {
-    if (this.mountedCallback) await this.mountedCallback();
+    for (const callback of this.mountedCallback) await callback();
   }
 
   async execUnmountCallback(): Promise<void> {
-    if (this.unmountCallback) await this.unmountCallback();
+    for (const callback of this.unmountCallback) await callback();
   }
 }

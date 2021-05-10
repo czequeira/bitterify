@@ -1,3 +1,4 @@
+import uuid from 'uuid-random';
 import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
 import { Child, Children } from '../core/types';
@@ -20,7 +21,9 @@ export function dialog(
     getChildren(children, bind),
   );
 
-  visible.subscribeCallback('modal-visible', () => {
+  const id = uuid();
+
+  visible.subscribeCallback(id, () => {
     const htmlDialogElement = modal.getHtmlElement();
     if (htmlDialogElement instanceof HTMLDialogElement) {
       if (typeof htmlDialogElement.showModal === 'function') {
@@ -32,10 +35,15 @@ export function dialog(
     }
   });
 
-  if (bind)
-    bind.subscribeCallback('id', (bind: Bind) => {
+  modal.onUnmount(() => visible.unsubscribe(id));
+
+  if (bind) {
+    const id = uuid();
+    bind.subscribeCallback(id, (bind: Bind) => {
       modal.setChildren(getChildren(children, bind));
     });
+    modal.onUnmount(() => bind.unsubscribe(id));
+  }
 
   return modal;
 }

@@ -1,3 +1,4 @@
+import uuid from 'uuid-random';
 import { createComponent } from '../../core';
 import { Component, Bind } from '../../core/classes';
 import { BitterifyError } from '../../core/errors';
@@ -20,6 +21,9 @@ export function createDinamicContent(htmlType: string) {
         bind,
       );
       dinamicContentComponent.subscribe(bind);
+      dinamicContentComponent.onUnmount(() => {
+        bind.unsubscribe(dinamicContentComponent.getId());
+      });
       return dinamicContentComponent;
     }
     throw new BitterifyError('error');
@@ -42,10 +46,13 @@ export function createDinamicChildren(htmlType: string) {
       getChildren(children, bind),
     );
 
-    if (bind && typeof children === 'function')
-      bind.subscribeCallback('id', (bind: Bind) => {
+    if (bind && typeof children === 'function') {
+      const id = uuid();
+      bind.subscribeCallback(id, (bind: Bind) => {
         dinamicChildrenComponent.setChildren(children(bind));
       });
+      dinamicChildrenComponent.onUnmount(() => bind.unsubscribe(id));
+    }
 
     return dinamicChildrenComponent;
   }
@@ -63,12 +70,15 @@ export function createDinamicList(htmlType: string) {
     const lis = getStrings(strings, bind).map((i) => createComponent('li', i));
     const dinamicChildrenComponent = createComponent(htmlType, undefined, lis);
 
-    if (bind && typeof strings === 'function')
-      bind.subscribeCallback('id', (bind: Bind) => {
+    if (bind && typeof strings === 'function') {
+      const id = uuid();
+      bind.subscribeCallback(id, (bind: Bind) => {
         dinamicChildrenComponent.setChildren(
           strings(bind).map((i: string) => createComponent('li', i)),
         );
       });
+      dinamicChildrenComponent.onUnmount(() => bind.unsubscribe(id));
+    }
 
     return dinamicChildrenComponent;
   }

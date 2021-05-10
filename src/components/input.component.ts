@@ -1,3 +1,4 @@
+import uuid from 'uuid-random';
 import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
 import { getString } from '../utils';
@@ -51,10 +52,12 @@ export function inputSubmit(content: any, bind?: Bind): Component {
   input.setAttribute('type', 'submit');
   input.setAttribute('value', getString(content, bind));
   if (bind) {
-    bind.subscribeCallback('bindinput', (b) => {
+    const id = uuid();
+    bind.subscribeCallback(id, (b) => {
       input.setAttribute('value', content(b));
     });
     input.subscribe(bind);
+    input.onUnmount(() => bind.unsubscribe(input.getId()));
   }
   return input;
 }

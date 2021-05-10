@@ -15,6 +15,9 @@ export function button(
 ): Component {
   const button = createComponent('button', content, undefined, bind);
   button.addEvent('click', fn);
-  if (bind) button.subscribe(bind);
+  if (bind) {
+    button.subscribe(bind);
+    button.onUnmount(() => bind.unsubscribe(button.getId()));
+  }
   return button;
 }
