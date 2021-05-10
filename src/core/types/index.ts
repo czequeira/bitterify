@@ -16,9 +16,4 @@ export type Callback = () => void | Promise<void>;
 
 export type Links = Array<ILink | string>;
 
-interface ICallbackSubscribed {
-  id: string;
-  callback: (bind: Bind) => void | Promise<void>;
-}
-
-export type Subscriber = Component | ICallbackSubscribed;
+export type Subscriber = Component | ((bind: Bind) => void | Promise<void>);

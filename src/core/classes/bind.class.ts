@@ -3,7 +3,7 @@ import { Subscriber } from '../types';
 import { Component } from './component.class';
 
 export class Bind {
-  private subscribers: Subscriber[] = [];
+  private subscribers: { [id: string]: Subscriber } = {};
 
   // TODO: Añadir el instanceof tambien
   constructor(private _value: any, private _typeof?: string) {
@@ -15,21 +15,26 @@ export class Bind {
   }
 
   subscribeComponent(component: Component): void {
-    this.subscribers.push(component);
+    this.subscribers[component.getId()] = component;
   }
 
   subscribeCallback(id: string, callback: (bind: Bind) => void): void {
-    this.subscribers.push({ id, callback });
+    this.subscribers[id] = callback;
+  }
+
+  unsubscribe(id: string): void {
+    delete this.subscribers[id];
   }
 
   set value(value: any) {
     if (typeof value !== this._typeof)
       throw new BitterifyError('incorrect bind type');
     this._value = value;
-    this.subscribers.forEach((c) => {
-      if (c instanceof Component) c.refreshContent(this);
-      else c.callback(this);
-    });
+    for (const index in this.subscribers) {
+      const subscriber = this.subscribers[index];
+      if (subscriber instanceof Component) subscriber.refreshContent(this);
+      else subscriber(this);
+    }
   }
 
   get value(): any {

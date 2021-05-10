@@ -1,9 +1,11 @@
+import uuid from 'uuid-random';
 import { createHtmlElement, refreshContent, setChildren } from '../actions';
 import { Callback, Child, Content, Fn, HtmlElement } from '../types';
 import { Bind } from './bind.class';
 import { Event } from './event.class';
 
 export class Component {
+  private id: string;
   private htmlElement: HtmlElement;
   private style: CSSStyleDeclaration | undefined;
   // private events: { [name: string]: Event } = {};
@@ -18,10 +20,15 @@ export class Component {
     private children: Component[] = [],
     bind?: Bind,
   ) {
+    this.id = uuid();
     this.htmlElement = createHtmlElement(htmlType, content, children, bind);
     this.children.forEach((child) => child.execMountedCallback());
     if (this.htmlElement instanceof HTMLElement)
       this.style = this.htmlElement.style;
+  }
+
+  getId(): string {
+    return this.id;
   }
 
   getHtmlElement(): HtmlElement {
