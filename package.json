@@ -1,6 +1,6 @@
 {
   "name": "bitterify",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "description": "A frontend framework without tags",
   "repository": "czequeira/bitterify",
   "main": "lib/index.js",
