@@ -1,8 +1,14 @@
 # bitterify
 
-> if your app isn't bitter enough try **bitterify** it
-
 ![npm](https://img.shields.io/npm/v/bitterify)
+
+![NPM](https://img.shields.io/npm/l/bitterify)
+
+![npm](https://img.shields.io/npm/dw/bitterify)
+
+![npm bundle size](https://img.shields.io/bundlephobia/min/bitterify)
+
+> if your app isn't bitter enough try **bitterify** it
 
 **Bitterify** proposes a way to develop frontend applications without using tag
 syntax such as jsx, xml or html, instead we suggest using functions that
