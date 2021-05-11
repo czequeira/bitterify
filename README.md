@@ -2,6 +2,8 @@
 
 > if your app isn't bitter enough try **bitterify** it
 
+![npm](https://img.shields.io/npm/v/bitterify)
+
 **Bitterify** proposes a way to develop frontend applications without using tag
 syntax such as jsx, xml or html, instead we suggest using functions that
 generate the components dynamically
