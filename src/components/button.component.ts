@@ -19,5 +19,8 @@ export function button(
     button.subscribe(bind);
     button.onUnmount(() => bind.unsubscribe(button.getId()));
   }
+  button.onUnmount(() => {
+    button.removeEvent('click', fn);
+  });
   return button;
 }

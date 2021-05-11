@@ -10,6 +10,9 @@ function inputWithPlaceholder(inputType: string) {
     input.setAttribute('value', bind.value);
     input.setAttribute('type', inputType);
     input.addEvent('input', (arg) => (bind.value = arg.srcElement?.value));
+    input.onUnmount(() => {
+      input.removeEvent('input', (arg) => (bind.value = arg.srcElement?.value));
+    });
     return input;
   };
 }
@@ -20,6 +23,9 @@ function inputWithoutPlaceholder(inputType: string) {
     input.setAttribute('value', bind.value);
     input.setAttribute('type', inputType);
     input.addEvent('input', (arg) => (bind.value = arg.srcElement?.value));
+    input.onUnmount(() => {
+      input.removeEvent('input', (arg) => (bind.value = arg.srcElement?.value));
+    });
     return input;
   };
 }

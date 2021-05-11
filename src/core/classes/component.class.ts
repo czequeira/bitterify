@@ -2,7 +2,7 @@ import uuid from 'uuid-random';
 import { createHtmlElement, refreshContent, setChildren } from '../actions';
 import { Callback, Child, Content, Fn, HtmlElement } from '../types';
 import { Bind } from './bind.class';
-import { Event } from './event.class';
+// import { Event } from './event.class';
 
 export class Component {
   private id: string;
@@ -88,10 +88,12 @@ export class Component {
   }
 
   addEvent(name: string, fn: Fn): Component {
-    const event = new Event(fn);
-    this.htmlElement.addEventListener(name, (...args: any[]) =>
-      event.exec(...args),
-    );
+    this.htmlElement.addEventListener(name, fn);
+    return this;
+  }
+
+  removeEvent(name: string, fn: Fn): Component {
+    this.htmlElement.removeEventListener(name, fn);
     return this;
   }
 
