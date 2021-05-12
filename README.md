@@ -245,6 +245,7 @@ app(B);
 |b, i, h1, h2, h3, h4, h5, h6, em, code, pre, strong, u|`content: string`|static content|
 ||`content: (bind: Bind) => string, bind: Bind`|dynamic content|
 |progress|`bind: Bind`|the bind to the value attribute|
+|img|`src: string, alt?: string`|the `src` and `alt` attributes of a `<img>`|
 
 ## Deployment
 
