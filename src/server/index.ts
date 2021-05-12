@@ -77,3 +77,22 @@ export async function watch(file = 'src/index.ts', out: string) {
 
   bundle();
 }
+
+export async function build(file = 'src/index.ts', out: string) {
+  function bundle() {
+    console.log('compiling...');
+
+    b.bundle(function (err, buf) {
+      if (err) throw err;
+      fs.writeFile(out, buf.toString(), (err) => {
+        if (err) throw err;
+        console.log('saved');
+      });
+      console.log('compiled');
+    });
+  }
+
+  const b = browserify().add(file).plugin(tsify).plugin('tinyify');
+
+  bundle();
+}
