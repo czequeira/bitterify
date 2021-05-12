@@ -27,7 +27,7 @@ npm i -s bitterify
 if you want to use the develpment server then
 
 ``` sh
-npm i -s browserify tsify watchify
+npm i -s browserify tsify watchify typescript commander
 ```
 
 the development server is optional,
@@ -257,9 +257,9 @@ The development server included create the html and bundle the app using browser
 
 - Add ssr deployment
 - Add cdn deployment
-- Add production deployment
 - Add development live server
 - Add test ecosystem
 - Add components
   - radio
   - label
+  - t (translate)
