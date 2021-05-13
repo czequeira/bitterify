@@ -232,11 +232,11 @@ app(B);
 ||`children: (bind: Bind) => Child[], bind: Bind`|dynamic children|
 |formItem|`input: Component, validator: IValidator`|the input and the validators rules|
 |form|`submit: (event: Event) => void, formItems: Child[]`|callback function to submit event and children|
-|input, inputPassword, inputEmail, inputHidden, inputNumber, inputSearch, inputUrl|`bind: Bind, placeholder = ''`|the bind to the value of the input and a optional placeholder|
+|input, inputPassword, inputEmail, inputHidden, inputNumber, inputSearch, inputUrl|`bind: Bind, placeholder?: string`|the bind to the value of the input and a optional static placeholder|
+||`bind: Bind, placeholder: (bind: Bind) => string, placeholderBind: Bind`|the bind to the value of the input and a dynamical placeholder|
 |inputDate, inputTime, inputDatetimeLocal, inputFile, inputRange, inputCheckbox, inputColor|`bind: Bind`|the bind to the value attribute|
-|inputSubmit|`content: string`|static content of the submit button|
+|inputSubmit, inputReset|`content: string`|static content of the submit button|
 ||`content: (bind: Bind) => string, bind: Bind`|dynamic content to the submit button|
-|inputReset|`content: string`|static content to the reset button|
 |ol, ul|`strings: string[]`|static string to create the `<li>` items|
 ||`(bind: Bind) => string[], bind: Bind`|dynamic `<li>` items|
 |router|`routes: IRoute[]`|the collection of routes|
@@ -246,6 +246,7 @@ app(B);
 ||`content: (bind: Bind) => string, bind: Bind`|dynamic content|
 |progress|`bind: Bind`|the bind to the value attribute|
 |img|`src: string, alt?: string`|the `src` and `alt` attributes of a `<img>`|
+||`src: string, alt: (bind: Bind) => string, bind: Bind`|the `src` and a dynamic `alt` attributes of a `<img>`|
 |svg|`viewBox: string, path: string`|the `viewBox` attribute of the `<svg>` and the `d` attribute of the `<path>`|
 
 ## Deployment

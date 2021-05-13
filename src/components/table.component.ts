@@ -4,6 +4,8 @@ import { Bind, Component } from '../core/classes';
 import { BitterifyError } from '../core/errors';
 import { Child } from '../core/types';
 
+// TODO: put the header dynamic to the change of language
+
 interface ITableColumn {
   header: string;
   body: (arg: any) => Child;

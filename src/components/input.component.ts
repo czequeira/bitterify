@@ -1,12 +1,33 @@
 import uuid from 'uuid-random';
 import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
+import { Content } from '../core/types';
 import { getString } from '../utils';
 
 function inputWithPlaceholder(inputType: string) {
-  return function (bind: Bind, placeholder = ''): Component {
+  function input(bind: Bind): Component;
+  function input(bind: Bind, placeholder: string): Component;
+  function input(
+    bind: Bind,
+    placeholder: (bind: Bind) => string,
+    placeholderBind: Bind,
+  ): Component;
+  function input(
+    bind: Bind,
+    placeholder?: Content,
+    placeholderBind?: Bind,
+  ): Component {
     const input = createComponent('input');
-    input.setAttribute('placeholder', placeholder);
+    if (placeholder && typeof placeholder === 'string')
+      input.setAttribute('placeholder', placeholder);
+    if (placeholderBind && typeof placeholder === 'function') {
+      const id = uuid();
+      input.setAttribute('alt', placeholder(placeholderBind));
+      placeholderBind.subscribeCallback(id, (placeholderBind) =>
+        input.setAttribute('placeholder', placeholder(placeholderBind)),
+      );
+      input.onUnmount(() => placeholderBind.unsubscribe(id));
+    }
     input.setAttribute('value', bind.value);
     input.setAttribute('type', inputType);
     input.addEvent('input', (arg) => (bind.value = arg.srcElement?.value));
@@ -14,7 +35,9 @@ function inputWithPlaceholder(inputType: string) {
       input.removeEvent('input', (arg) => (bind.value = arg.srcElement?.value));
     });
     return input;
-  };
+  }
+
+  return input;
 }
 
 function inputWithoutPlaceholder(inputType: string) {
@@ -28,6 +51,30 @@ function inputWithoutPlaceholder(inputType: string) {
     });
     return input;
   };
+}
+
+function inputButton(inputType: string) {
+ function input(content: string): Component;
+ function input(
+  content: (bind: Bind) => string,
+  bind: Bind,
+): Component;
+ function input(content: any, bind?: Bind): Component {
+  const input = createComponent('input');
+  input.setAttribute('type', 'submit');
+  input.setAttribute('value', getString(content, bind));
+  if (bind) {
+    const id = uuid();
+    bind.subscribeCallback(id, (b) => {
+      input.setAttribute('value', content(b));
+    });
+    input.subscribe(bind);
+    input.onUnmount(() => bind.unsubscribe(input.getId()));
+  }
+  return input;
+}
+
+  return input;
 }
 
 export const input = inputWithPlaceholder('text');
@@ -48,29 +95,6 @@ export const inputColor = inputWithoutPlaceholder('color');
 
 // export const inputRadio = inputWithoutPlaceholder('radio');
 
-export function inputSubmit(content: string): Component;
-export function inputSubmit(
-  content: (bind: Bind) => string,
-  bind: Bind,
-): Component;
-export function inputSubmit(content: any, bind?: Bind): Component {
-  const input = createComponent('input');
-  input.setAttribute('type', 'submit');
-  input.setAttribute('value', getString(content, bind));
-  if (bind) {
-    const id = uuid();
-    bind.subscribeCallback(id, (b) => {
-      input.setAttribute('value', content(b));
-    });
-    input.subscribe(bind);
-    input.onUnmount(() => bind.unsubscribe(input.getId()));
-  }
-  return input;
-}
+export const inputSubmit = inputButton('submit');
+export const inputReset = inputButton('reset');
 
-export function inputReset(content: string): Component {
-  const input = createComponent('input');
-  input.setAttribute('type', 'reset');
-  input.setAttribute('value', content);
-  return input;
-}
