@@ -246,6 +246,7 @@ app(B);
 ||`content: (bind: Bind) => string, bind: Bind`|dynamic content|
 |progress|`bind: Bind`|the bind to the value attribute|
 |img|`src: string, alt?: string`|the `src` and `alt` attributes of a `<img>`|
+|svg|`viewBox: string, path: string`|the `viewBox` attribute of the `<svg>` and the `d` attribute of the `<path>`|
 
 ## Deployment
 
