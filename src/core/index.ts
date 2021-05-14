@@ -22,8 +22,9 @@ export function createBind(_value: any, _typeof?: string): Bind {
 export function createRoute(
   path: string,
   view: (args: string[]) => Child,
+  layout?: (child: Child) => Child,
 ): Route {
-  return new Route(path, view);
+  return new Route(path, view, layout);
 }
 
 export function createRouter(routes: Route[]): Router {

@@ -214,6 +214,7 @@ bitterify.app([bitterify.nav(), bitterify.aside(), bitterify.main(), bitterify.f
 const home = () => bitterify.h1('Home');
 const about = () => bitterify.h1('About');
 const hello = ([name]) => bitterify.h1('Hello '+name);
+const layout = (child) => bitterify.aside([child]);
 
 const aHome = bitterify.a('Home', '#home');
 const aAbout = bitterify.a('About', '#about');
@@ -222,7 +223,7 @@ const aHello = bitterify.a('Hello', '#hello/Bartolo');
 const router = bitterify.router([
   { path: 'home', view: home },
   { path: 'about', view: about },
-  { path: 'hello/$', view: hello },
+  { path: 'hello/$', view: hello, layout },
 ]);
 
 bitterify.app([aHome, aAbout, aHello, router]);
@@ -246,6 +247,16 @@ bitterify.app([aHome, aAbout, aHello, router]);
       mounted.querySelectorAll('a')[2]?.click();
       setTimeout(() => {
         expect(mounted.querySelector('h1')?.innerText).toBe('Hello Bartolo');
+        done();
+      }, 100);
+    });
+
+    test('it should mount the layout', (done) => {
+      expect(mounted.querySelector('h1')).toBeNull();
+
+      mounted.querySelectorAll('a')[2]?.click();
+      setTimeout(() => {
+        expect(mounted.querySelector('aside')).toBeTruthy();
         done();
       }, 100);
     });

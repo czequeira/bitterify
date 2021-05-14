@@ -2,13 +2,17 @@ import { BitterifyError } from '../errors';
 import { Child } from '../types';
 import { Component } from './component.class';
 
-const REG_PATCH = /^\w+(\-\w+)*(\/(\w+(\-\w+)*|\$))*$/;
+const REG_PATCH = /^\w+(\-\w+)*(\/(\w+(\-\w+)*|\$))*$|\*/;
 
 export class Route {
   private path: string;
   private regExp: RegExp;
 
-  constructor(path: string, private view: (args: string[]) => Child) {
+  constructor(
+    path: string,
+    private view: (args: string[]) => Child,
+    private layout: (child: Child) => Child = (child) => child,
+  ) {
     if (!REG_PATCH.test(path)) throw new BitterifyError('invalid path');
     this.path = path;
 
@@ -23,7 +27,7 @@ export class Route {
   }
 
   getView(args: string[]): Child {
-    return this.view(args);
+    return this.layout(this.view(args));
   }
 
   getRegExp(): RegExp {
@@ -45,7 +49,9 @@ export class Router {
 
   private renderView(): void {
     const hash = location.hash;
-    const current = this.routes.find((i) => i.getRegExp().test(hash));
+    const current = this.routes.find(
+      (i) => i.getRegExp().test(hash) || i.getPath() === '*',
+    );
     if (current) {
       const args = current.getRegExp().exec(hash);
       this.component.setChildren([current.getView(args?.slice(1) || [])]);

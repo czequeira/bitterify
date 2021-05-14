@@ -133,6 +133,26 @@ bitterify.core.createApp(['Router', router.getComponent()]);
         done();
       }, 0);
     });
+
+    test('it should render the * path', async (done) => {
+      const code = `
+const router = bitterify.core.createRouter([
+  bitterify.core.createRoute('*', () => 'All'),
+]);
+
+bitterify.core.createApp(['Router', router.getComponent()]);
+`;
+      const mounted = await mount(code);
+
+      expect(mounted.querySelectorAll('div')[1]?.innerText).toBe('');
+
+      mounted.location.hash = '#home';
+      mounted.dispatchEvent(new Event('hashchange'));
+      setTimeout(() => {
+        expect(mounted.querySelectorAll('div')[1]?.innerHTML).toBe('All');
+        done();
+      }, 0);
+    });
   });
 
   describe('style', () => {
