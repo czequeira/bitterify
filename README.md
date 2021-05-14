@@ -262,6 +262,6 @@ The development server included create the html and bundle the app using browser
 - Add development live server
 - Add test ecosystem
 - Add components
+  - dinamic table headers
   - radio
   - label
-  - t (translate)
