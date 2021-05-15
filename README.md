@@ -224,7 +224,7 @@ app(B);
 |a|`content: string, href: string`|statics strings|
 ||`content: (bind: Bind) => string, href: string, bind: Bind`|dynamic content|
 ||`content: (bind: Bind) => string, href: (bind: Bind) => string, bind: Bind`|dynamic content and href|
-|button|`fn: () => void, content: string`|callback function to event click andstatic content|
+|button|`fn: () => void, content?: string`|callback function to event click and static content|
 ||`fn: () => void, content: (bind: Bind) => string, bind: Bind`|callback function to click event and dynamic content|
 |dialog|`visible: Bind, children: Child[]`|boolean bind to sync the visible state and static children|
 ||`visible: Bind, children: (bind: Bind) => Child[], bind: Bind`|boolean bind to sync the visible state and dynamic children|
@@ -261,6 +261,7 @@ The development server included create the html and bundle the app using browser
 - Add cdn deployment
 - Add development live server
 - Add test ecosystem
+- Add literal html inject to the components
 - Add components
   - dinamic table headers
   - radio
