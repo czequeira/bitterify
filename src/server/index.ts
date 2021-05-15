@@ -30,7 +30,13 @@ export async function serve(port = 8080, file = 'src/index.ts') {
 
   const httpServer = http.createServer((req, res) => {
     if (req.url === '/') {
-      const html = `<!DOCTYPE html><div id="app" /><script>${compiled}</script>`;
+      const html = `<!DOCTYPE html>
+      <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      </head>
+      <body>
+         <div id="app" /><script>${compiled}</script>
+      </body>`;
       res.write(html);
       res.end();
     } else {
