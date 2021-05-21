@@ -273,7 +273,7 @@ const data = bitterify.bind([
 
 const Table = bitterify.table(data, [
   bitterify.tableColumn('name', (d) => d[0]),
-  bitterify.tableColumn('age', (d) => d[1]),
+  bitterify.tableColumn('age', (d) => bitterify.b(d[1])),
 ]);
 
 bitterify.app([Table]);
