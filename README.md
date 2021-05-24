@@ -266,3 +266,5 @@ The development server included create the html and bundle the app using browser
   - dinamic table headers
   - radio
   - label
+- Add a change log to the docs
+- Put a middleware mechanism to the router
