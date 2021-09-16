@@ -125,6 +125,27 @@ bitterify.app([
     });
   });
 
+  describe.only('div: bug setChilds', () => {
+    let mounted: Document;
+
+    beforeEach(async () => {
+      const code = `
+const data = bitterify.bind(['hola', 'hola']);
+
+bitterify.app([
+  bitterify.div((d) => d.value.map((t) => bitterify.b(t)), data),
+]);
+
+data.value = ['hola', 'hola', 'hola']
+`;
+      mounted = await mount(code);
+    });
+
+    test('it should not create more component', () => {
+      expect(mounted.querySelectorAll('b').length).toBe(3);
+    });
+  });
+
   describe('form', () => {
     let mounted: Document;
 
