@@ -95,3 +95,8 @@ export interface IValidator {
   type?: string;
   pattern?: string;
 }
+
+export interface ISelectOptions {
+  value: any;
+  label: string;
+}

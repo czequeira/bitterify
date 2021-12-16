@@ -58,6 +58,44 @@ bitterify.app([btn]);
     });
   });
 
+  describe.only('select', () => {
+    let mounted: Document;
+
+    beforeEach(async () => {
+      const code = `
+const selectBind = bitterify.bind(45, 'number');
+
+const select = bitterify.select(
+  selectBind,
+  [{value: 45, label: 'A'}, {value: 30, label: 'B'}]
+);
+
+bitterify.app([select]);
+`;
+      mounted = await mount(code);
+    });
+
+    test('it should mount a select', () => {
+      expect(mounted.querySelector('select')).toBeDefined();
+      expect(mounted.querySelector('option')).toBeDefined();
+    });
+
+    test('it should select a value', () => {
+      const option = mounted.querySelector('option');
+      const select = mounted.querySelector('select');
+      console.log(select?.innerHTML)
+      option?.click();
+      console.log(select?.innerHTML)
+      expect(2 + 2).toBe(5);
+      /*
+      const button = mounted.querySelector('button');
+      expect(button?.innerText).toBe('before click');
+      button?.click();
+      expect(button?.innerText).toBe('after click');
+      */
+    });
+  });
+
   describe('class', () => {
     let mounted: Document;
 
@@ -125,7 +163,7 @@ bitterify.app([
     });
   });
 
-  describe.only('div: bug setChilds', () => {
+  describe('div: bug setChilds', () => {
     let mounted: Document;
 
     beforeEach(async () => {

@@ -14,3 +14,4 @@ export * from './list.component';
 export * from './progress.component';
 export * from './img.component';
 export * from './svg.component';
+export * from './select.component';
