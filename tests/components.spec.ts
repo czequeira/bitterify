@@ -58,7 +58,7 @@ bitterify.app([btn]);
     });
   });
 
-  describe.only('select', () => {
+  describe('select', () => {
     let mounted: Document;
 
     beforeEach(async () => {

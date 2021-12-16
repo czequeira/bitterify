@@ -2,7 +2,6 @@ import uuid from 'uuid-random';
 import { createComponent } from '../core';
 import { Component, Bind } from '../core/classes';
 import { Content } from '../core/types';
-import { getString } from '../utils';
 import { ISelectOptions } from './utils';
 
 export function select(bind: Bind, options: ISelectOptions[]): Component;
@@ -36,12 +35,13 @@ export function select(
   }
   select.addEvent('input', (arg) => (bind.value = arg.srcElement?.value));
 
-  const children = options.map((o) => {
-    const c = createComponent('option', o.label).setAttribute('value', o.value);
-    if (bind.value === o.value) c.setAttribute('selected', 'true');
-    return c;
-  });
-  select.setChildren(children);
+  select.setChildren(
+    options.map((o) =>
+      createComponent('option', o.label).setAttribute('value', o.value),
+    ),
+  );
+
+  select.setAttribute('value', bind.value);
 
   const id = uuid();
   bind.subscribeCallback(id, (bind) => {
