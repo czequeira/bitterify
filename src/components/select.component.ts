@@ -36,11 +36,18 @@ export function select(
   }
   select.addEvent('input', (arg) => (bind.value = arg.srcElement?.value));
 
-  select.setChildren(
-    options.map((o) =>
-      createComponent('option', o.label).setAttribute('value', o.value),
-    ),
-  );
+  const children = options.map((o) => {
+    const c = createComponent('option', o.label).setAttribute('value', o.value);
+    if (bind.value === o.value) c.setAttribute('selected', 'true');
+    return c;
+  });
+  select.setChildren(children);
+
+  const id = uuid();
+  bind.subscribeCallback(id, (bind) => {
+    select.setAttribute('value', bind.value);
+  });
+  select.onUnmount(() => bind.unsubscribe(id));
 
   select.onUnmount(() => {
     select.removeEvent('input', (arg) => (bind.value = arg.srcElement?.value));

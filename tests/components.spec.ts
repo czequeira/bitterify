@@ -63,14 +63,16 @@ bitterify.app([btn]);
 
     beforeEach(async () => {
       const code = `
-const selectBind = bitterify.bind(45, 'number');
+const selectBind = bitterify.bind('30');
 
 const select = bitterify.select(
   selectBind,
-  [{value: 45, label: 'A'}, {value: 30, label: 'B'}]
+  [{value: '45', label: 'A'}, {value: '30', label: 'B'}]
 );
 
-bitterify.app([select]);
+const p = bitterify.p((bind) => [bind.value], selectBind);
+
+bitterify.app([select, p]);
 `;
       mounted = await mount(code);
     });
@@ -81,18 +83,12 @@ bitterify.app([select]);
     });
 
     test('it should select a value', () => {
-      const option = mounted.querySelector('option');
       const select = mounted.querySelector('select');
-      console.log(select?.innerHTML)
-      option?.click();
-      console.log(select?.innerHTML)
-      expect(2 + 2).toBe(5);
-      /*
-      const button = mounted.querySelector('button');
-      expect(button?.innerText).toBe('before click');
-      button?.click();
-      expect(button?.innerText).toBe('after click');
-      */
+      if (select) {
+        select.value = '45';
+        select?.dispatchEvent(new Event('input'));
+      }
+      expect(mounted.querySelector('p')?.innerHTML).toBe('45');
     });
   });
 
