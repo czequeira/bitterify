@@ -28,6 +28,13 @@ function inputWithPlaceholder(inputType: string) {
       );
       input.onUnmount(() => placeholderBind.unsubscribe(id));
     }
+
+    const id = uuid();
+    bind.subscribeCallback(id, (bind) => {
+      input.setAttribute('value', bind.value);
+    });
+    input.onUnmount(() => bind.unsubscribe(id));
+
     input.setAttribute('value', bind.value);
     input.setAttribute('type', inputType);
     input.addEvent('input', (arg) => (bind.value = arg.srcElement?.value));
@@ -49,30 +56,34 @@ function inputWithoutPlaceholder(inputType: string) {
     input.onUnmount(() => {
       input.removeEvent('input', (arg) => (bind.value = arg.srcElement?.value));
     });
+
+    const id = uuid();
+    bind.subscribeCallback(id, (bind) => {
+      input.setAttribute('value', bind.value);
+    });
+    input.onUnmount(() => bind.unsubscribe(id));
+
     return input;
   };
 }
 
 function inputButton(inputType: string) {
- function input(content: string): Component;
- function input(
-  content: (bind: Bind) => string,
-  bind: Bind,
-): Component;
- function input(content: any, bind?: Bind): Component {
-  const input = createComponent('input');
-  input.setAttribute('type', 'submit');
-  input.setAttribute('value', getString(content, bind));
-  if (bind) {
-    const id = uuid();
-    bind.subscribeCallback(id, (b) => {
-      input.setAttribute('value', content(b));
-    });
-    input.subscribe(bind);
-    input.onUnmount(() => bind.unsubscribe(input.getId()));
+  function input(content: string): Component;
+  function input(content: (bind: Bind) => string, bind: Bind): Component;
+  function input(content: any, bind?: Bind): Component {
+    const input = createComponent('input');
+    input.setAttribute('type', inputType);
+    input.setAttribute('value', getString(content, bind));
+    if (bind) {
+      const id = uuid();
+      bind.subscribeCallback(id, (b) => {
+        input.setAttribute('value', content(b));
+      });
+      input.subscribe(bind);
+      input.onUnmount(() => bind.unsubscribe(input.getId()));
+    }
+    return input;
   }
-  return input;
-}
 
   return input;
 }
@@ -97,4 +108,3 @@ export const inputColor = inputWithoutPlaceholder('color');
 
 export const inputSubmit = inputButton('submit');
 export const inputReset = inputButton('reset');
-
