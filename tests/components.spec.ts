@@ -125,7 +125,7 @@ bitterify.app([
     });
   });
 
-  describe.only('div: bug setChilds', () => {
+  describe('div: bug setChilds', () => {
     let mounted: Document;
 
     beforeEach(async () => {
