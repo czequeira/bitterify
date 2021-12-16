@@ -213,6 +213,34 @@ bitterify.app([input, p]);
     });
   });
 
+  describe('input: bug', () => {
+    let mounted: Document;
+
+    beforeEach(async () => {
+      const code = `
+const text = bitterify.bind('not changed');
+
+const input = bitterify.input(text, 'placeholder');
+const input2 = bitterify.input(text, 'placeholder');
+
+bitterify.app([input, input2]);
+`;
+      mounted = await mount(code);
+    });
+
+    test('it should mount a input and bind to a p', () => {
+      const input = mounted.querySelector('input');
+      expect(input?.value).toBe('not changed');
+
+      if (input) {
+        input.value = 'changed';
+        input.dispatchEvent(new Event('input'));
+      }
+
+      expect(mounted.querySelectorAll('input')[1]?.value).toBe('changed');
+    });
+  });
+
   describe('layout', () => {
     test('it should render aside, nav and footer', async () => {
       const code = `

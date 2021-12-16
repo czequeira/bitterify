@@ -28,6 +28,13 @@ function inputWithPlaceholder(inputType: string) {
       );
       input.onUnmount(() => placeholderBind.unsubscribe(id));
     }
+
+    const id = uuid();
+    bind.subscribeCallback(id, (bind) => {
+      input.setAttribute('value', bind.value);
+    });
+    input.onUnmount(() => bind.unsubscribe(id));
+
     input.setAttribute('value', bind.value);
     input.setAttribute('type', inputType);
     input.addEvent('input', (arg) => (bind.value = arg.srcElement?.value));
@@ -49,6 +56,13 @@ function inputWithoutPlaceholder(inputType: string) {
     input.onUnmount(() => {
       input.removeEvent('input', (arg) => (bind.value = arg.srcElement?.value));
     });
+
+    const id = uuid();
+    bind.subscribeCallback(id, (bind) => {
+      input.setAttribute('value', bind.value);
+    });
+    input.onUnmount(() => bind.unsubscribe(id));
+
     return input;
   };
 }
