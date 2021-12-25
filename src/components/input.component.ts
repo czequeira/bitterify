@@ -31,7 +31,9 @@ function inputWithPlaceholder(inputType: string) {
 
     const id = uuid();
     bind.subscribeCallback(id, (bind) => {
-      input.setAttribute('value', bind.value);
+      const htmlElement = input.getHtmlElement();
+      if (htmlElement instanceof HTMLInputElement)
+        htmlElement.value = bind.value;
     });
     input.onUnmount(() => bind.unsubscribe(id));
 
@@ -59,7 +61,9 @@ function inputWithoutPlaceholder(inputType: string) {
 
     const id = uuid();
     bind.subscribeCallback(id, (bind) => {
-      input.setAttribute('value', bind.value);
+      const htmlElement = input.getHtmlElement();
+      if (htmlElement instanceof HTMLInputElement)
+        htmlElement.value = bind.value;
     });
     input.onUnmount(() => bind.unsubscribe(id));
 
