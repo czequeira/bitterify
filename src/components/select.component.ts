@@ -41,11 +41,13 @@ export function select(
     ),
   );
 
-  select.setAttribute('value', bind.value);
+  const htmlElement = select.getHtmlElement();
+  if (htmlElement instanceof HTMLSelectElement) htmlElement.value = bind.value;
 
   const id = uuid();
   bind.subscribeCallback(id, (bind) => {
-    select.setAttribute('value', bind.value);
+    if (htmlElement instanceof HTMLSelectElement)
+      htmlElement.value = bind.value;
   });
   select.onUnmount(() => bind.unsubscribe(id));
 
