@@ -136,4 +136,24 @@ export class Component {
   async execUnmountCallback(): Promise<void> {
     for (const callback of this.unmountCallback) await callback();
   }
+
+  title(content: string): Component;
+  title(content: (bind: Bind) => string, bind: Bind): Component;
+  title(content: Content, bind?: Bind): Component {
+    if (this.htmlElement instanceof HTMLElement) {
+      if (typeof content === 'string') this.htmlElement.title = content;
+
+      if (bind && typeof content === 'function') {
+        const id = uuid();
+        this.htmlElement.title = content(bind);
+        bind.subscribeCallback(id, (bind) => {
+          if (this.htmlElement instanceof HTMLElement)
+            this.htmlElement.title = content(bind);
+        });
+        this.onUnmount(() => bind.unsubscribe(id));
+      }
+    }
+
+    return this;
+  }
 }
